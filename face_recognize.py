@@ -109,7 +109,7 @@ def predict_Chubby(image):
 
 
 t1 = time.time()
-face_cascade = cv2.CascadeClassifier('/home/patrick/Desktop/morePython/cascade/cascades/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # Part 2: Use fisherRecognizer on camera stream
 #face_cascade = cv2.CascadeClassifier(haar_file)
 #webcam = cv2.VideoCapture(0)
