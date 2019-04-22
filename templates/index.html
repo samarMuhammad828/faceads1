@@ -119,25 +119,135 @@ a.animated-button.victoria-two:after {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
   transform: translateX(-50%) translateY(-50%) rotate(25deg);
 }
+#container {
+	margin: 0px auto;
+  width : "640";
+  height:"480";
+	border: 10px #333 solid;
+}
+#videoElement {
+	background-color: #666;
+}
 
+/* Control the right side */
+.right {
+  padding-top: 20px;
+  right: 0;
+  background-color: red;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
 }
 </style>
 <div class="jumbotron text-center">
-
   <div class="container">
-    
-    <h1>Face Detection System</h1>
-    <p style="color:#888;">Based on Python and OpenCV</p>
-    
-  </div>
-</div>
-<div class="container"> 
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h2>Here We go !</h2>
+    <h1>Advertisment based on AI human features recognition </h1>
+    <p style="color:#888;">Ahmed Elmahy</p>
+
+    <div class="right">
+        <h2 id="result_gender">Results</h2>
+        <h2 id="result_glass">Results</h2>
+        <h2 id="result_chubby">Results</h2>
+    </div>
+    <div id="viewer">
+        <div id="cam">
+            <video style="display:block;" id="video"  width="640" height="480" autoplay></video>
+        </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-6"> <a href="/exec" class="btn btn-sm animated-button victoria-two">Identify Me</a> </div> 
+</div>
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
+
+<script>
+//<div id="res" style="cursor:pointer;height:30px;"></div>
+//var video = document.querySelector("#videoElement");
+var video = document.getElementById('video');
+
+var ctx;
+var canvas = document.createElement('canvas');
+// Converts image to canvas; returns new canvas element
+canvas.width="640"
+canvas.height="480"
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+      webcamStream = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+
+
+window.setInterval(function(){
+  canvas.getContext("2d").drawImage(video, 0, 0, 640, 480);
+  send_canvas_ctx();
+  $("#res").show();
+}, 700);
+
+
+function ping() {
+	window.fetch('/snap_a_signal')
+	  .then(function(response) {
+		      return response.text()
+		    }).then(function(body) {
+          if (body["result"] == "0") {
+            console.log(body["result"] == "0");
+          } else {
+				    console.log(body);
+          }
+		    });
+}
+
+
+function send_canvas_ctx() {
+    input_data = canvas.toDataURL('image/png');
+	  window.fetch('/snap_a_signal', {
+  		method: 'POST',
+  		headers: {
+    		'Content-Type': 'application/json'
+  		},
+  		body: JSON.stringify({
+    		data: input_data
+  		})
+	}).then((response) => response.json()).then((json) => {
+
+   if (json["result"] == "0"){
+    0
+  } else {
+    document.getElementById('result_gender').innerHTML = json["gender"]
+    document.getElementById('result_glass').innerHTML = json["glass"]
+    document.getElementById('result_chubby').innerHTML = json["chubby"]
+
+  }
+  })}
+          
+
+
+
+</script>
+
 </body>
 </html>
