@@ -1,11 +1,6 @@
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, render_template, jsonify, request
 import cv2
-import torch
-from torchvision import transforms
-from torch.autograd import Variable
 from PIL import Image
-import time
-from io import StringIO
 import re
 from face_recognize import face_cascade, predict_gender, predict_glass, predict_Chubby
 import base64
