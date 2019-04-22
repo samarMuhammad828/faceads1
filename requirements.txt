@@ -1,5 +1,5 @@
 opencv-contrib-python
 Flask==0.11.1
-torch-cpu
+torch
 torchvision
 pillow
