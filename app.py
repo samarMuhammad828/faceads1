@@ -35,8 +35,8 @@ def im2info(pixels):
     image_data = image_data.encode()
     image_data = base64.b64decode(image_data)
 #        
-    with open('screenshot.jpg', 'wb') as f:
-        f.write(image_data)
+    #with open('screenshot.jpg', 'wb') as f:
+    #    f.write(image_data)
 #        
 #        
         
