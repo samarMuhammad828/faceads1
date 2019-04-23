@@ -168,7 +168,7 @@ a.animated-button.victoria-two:after {
   <div class="container">
     <h1>Advertisment based on AI human features recognition </h1>
     <p style="color:#888;">Ahmed Elmahy</p>
-
+    <p> There is 10 seconds latency but this doesnt appear when the model is not running on the server</p>
 
     <button type="button" class="button" id="snap">Click here to Open Camera</button>
   
@@ -218,7 +218,7 @@ document.getElementById("snap").addEventListener("click", function() {
       canvas.getContext("2d").drawImage(video, 0, 0, 300, 300);
       send_canvas_ctx();
       $("#res").show();
-      }, 3000);
+      }, 10000);
 
     })
     .catch(function (err0r) {
