@@ -150,21 +150,39 @@ a.animated-button.victoria-two:after {
   width: 150px;
   border-radius: 50%;
 }
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 </style>
+
 <div class="jumbotron text-center">
   <div class="container">
     <h1>Advertisment based on AI human features recognition </h1>
     <p style="color:#888;">Ahmed Elmahy</p>
 
-    <div class="right">
-        <h2 id="result_gender">Results</h2>
-        <h2 id="result_glass">Results</h2>
-        <h2 id="result_chubby">Results</h2>
-    </div>
+
+    <h2 class="button" id="snap">Click here to Open Camera</h2>
+
+  
     <div id="viewer">
         <div id="cam">
             <video style="display:block;" id="video"  width="640" height="480" autoplay></video>
         </div>
+    </div>
+    <div>""</div>
+    <div class="right">
+        <h3 id="result_gender">Results</h3>
+        <h3 id="result_glass">Results</h3>
+        <h3 id="result_chubby">Results</h3>
     </div>
   </div>
 </div>
@@ -189,23 +207,30 @@ var canvas = document.createElement('canvas');
 canvas.width="640"
 canvas.height="480"
 
-if (navigator.mediaDevices.getUserMedia) {
+
+document.getElementById("snap").addEventListener("click", function() {
+  if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(function (stream) {
       video.srcObject = stream;
       webcamStream = stream;
+
+      window.setInterval(function(){
+      canvas.getContext("2d").drawImage(video, 0, 0, 640, 480);
+      send_canvas_ctx();
+      $("#res").show();
+      }, 1000);
+
     })
     .catch(function (err0r) {
       console.log("Something went wrong!");
     });
 }
 
+});
 
-window.setInterval(function(){
-  canvas.getContext("2d").drawImage(video, 0, 0, 640, 480);
-  send_canvas_ctx();
-  $("#res").show();
-}, 1000);
+
+
 
 
 function ping() {
