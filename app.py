@@ -7,7 +7,13 @@ import io
 import numpy
 from mtcnn.mtcnn import MTCNN
 import cv2
+
+detector = MTCNN()
+dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
+
 app = Flask(__name__)
+
+
 
 @app.route('/')
 def index(name=None):
@@ -18,7 +24,7 @@ def index(name=None):
 @app.route('/snap_a_signal', methods=["POST", "GET"])
 def process_signal():
     pixels = request.get_json()['data']
-    result=im2info(pixels)
+    result=im2info(pixels, detector)
     
     if result:
         return jsonify(gender=result[0],
@@ -28,12 +34,11 @@ def process_signal():
     else:
         return jsonify(result = "0");
 
-def im2info(pixels):
+def im2info(pixels, detector ):
     #try:
-    dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
-    image_data = dataUrlPattern.match(pixels).group(2)
-    image_data = image_data.encode()
-    image_data = base64.b64decode(image_data)
+    #image_data = dataUrlPattern.match(pixels).group(2)
+    #image_data = image_data.encode()
+    image_data = base64.b64decode(pixels.split(",")[1])
 #        
     #with open('screenshot.jpg', 'wb') as f:
     #    f.write(image_data)
@@ -65,7 +70,8 @@ def im2info(pixels):
     background.paste(image, mask=image.split()[3]) # 3 is the alpha channel
     a = numpy.array(background)# a is readonly
 
-    detector = MTCNN()
+
+    del pixels, image_data, image
     faces = detector.detect_faces(a)
 
     if len(faces) > 0:
@@ -73,13 +79,23 @@ def im2info(pixels):
 
         #x,y,w,h = faces[0]
         if w > 20 :
+            imsh = a.shape
+      #newimg = img[max(0,(y-20)):min(imsh[0],(y+h+20)),
+                   #max(0,(x-20)):min(imsh[1],(x+w+20)),]
+            area = (max(0,(x-20)),
+                    max(0,(y-20)),
+                    min(imsh[1],(x+w+20)),
+                    min(imsh[0],(y+h+20)))
+            #PIL_image = background[y:y+h,x:x+w]
+            cropped_img = background.crop(area)
+            cropped_img.save('out.png')
+            
+            #cropped_img.show()
+            #PIL_image = Image.fromarray(newimg)
 
-            newimg = a[y:y+h,x:x+w]
-            PIL_image = Image.fromarray(newimg)
-
-            result = [predict_gender(PIL_image),
-                      predict_glass(PIL_image),
-                      predict_Chubby(PIL_image)]
+            result = [predict_gender(cropped_img),
+                      predict_glass(cropped_img),
+                      predict_Chubby(cropped_img)]
     
     
             return result
