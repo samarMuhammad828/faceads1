@@ -1,4 +1,5 @@
 # facerec.py
+#import cv2
 import torch
 from torchvision import transforms
 from torch.autograd import Variable

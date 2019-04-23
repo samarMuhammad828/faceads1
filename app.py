@@ -6,6 +6,7 @@ import base64
 import io
 import numpy
 from mtcnn.mtcnn import MTCNN
+import cv2
 app = Flask(__name__)
 
 @app.route('/')
@@ -17,8 +18,7 @@ def index(name=None):
 @app.route('/snap_a_signal', methods=["POST", "GET"])
 def process_signal():
     pixels = request.get_json()['data']
-    detector = MTCNN()
-    result=im2info(pixels, detector)
+    result=im2info(pixels)
     
     if result:
         return jsonify(gender=result[0],
@@ -28,16 +28,16 @@ def process_signal():
     else:
         return jsonify(result = "0");
 
-def im2info(pixels, detector):
+def im2info(pixels):
     #try:
     dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
     image_data = dataUrlPattern.match(pixels).group(2)
     image_data = image_data.encode()
     image_data = base64.b64decode(image_data)
 #        
-#    with open('screenshot.jpg', 'wb') as f:
-#        f.write(image_data)
-##        
+    with open('screenshot.jpg', 'wb') as f:
+        f.write(image_data)
+#        
 #        
         
     #fh = open("imageToSave.png", "wb")
@@ -64,17 +64,17 @@ def im2info(pixels, detector):
     background = Image.new("RGB", image.size, (255, 255, 255))
     background.paste(image, mask=image.split()[3]) # 3 is the alpha channel
     a = numpy.array(background)# a is readonly
-    
+
+    detector = MTCNN()
     faces = detector.detect_faces(a)
 
     if len(faces) > 0:
         x,y,w,h = faces[0]['box']
 
         #x,y,w,h = faces[0]
-        if w > 10 :
+        if w > 20 :
 
             newimg = a[y:y+h,x:x+w]
-            print(newimg.shape)
             PIL_image = Image.fromarray(newimg)
 
             result = [predict_gender(PIL_image),
