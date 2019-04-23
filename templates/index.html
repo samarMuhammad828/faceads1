@@ -170,8 +170,7 @@ a.animated-button.victoria-two:after {
     <p style="color:#888;">Ahmed Elmahy</p>
 
 
-    <h2 class="button" id="snap">Click here to Open Camera</h2>
-
+    <button type="button" class="button" id="snap">Click here to Open Camera</button>
   
     <div id="viewer">
         <div id="cam">
@@ -216,10 +215,10 @@ document.getElementById("snap").addEventListener("click", function() {
       webcamStream = stream;
 
       window.setInterval(function(){
-      canvas.getContext("2d").drawImage(video, 0, 0, 640, 480);
+      canvas.getContext("2d").drawImage(video, 0, 0, 300, 300);
       send_canvas_ctx();
       $("#res").show();
-      }, 1000);
+      }, 3000);
 
     })
     .catch(function (err0r) {
