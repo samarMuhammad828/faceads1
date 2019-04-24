@@ -219,7 +219,7 @@ a.animated-button.victoria-two:after {
 
 
 <div class="divcontainer">
-    <video  id="inputVideo" autoplay muted ></video>
+    <video  onplay="onPlay(this)" id="inputVideo" autoplay muted ></video>
     <canvas id="overlay"/>
 </div>
 <div class="right">
@@ -248,12 +248,27 @@ a.animated-button.victoria-two:after {
   //       </div>
   //   </div>
 
-
 $(document).ready(function() {
-  faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
+
+
  })
+
+
 async function run() {
-  
+  faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
+
+  const videoEl = document.getElementById('inputVideo')
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+
+    //navigator.mediaDevices.getUserMedia( {video: true})
+    //.then((stream) => {
+  videoEl.srcObject = stream;
+  onPlay(videoEl)
+
+  //  }).catch((err) => {console.log(err);});
+
+
+   
   //await faceapi.loadTinyFaceDetectorModel("{{ url_for('static', filename='models/')}}")
   //await faceapi.loadFaceRecognitionModel("{{ url_for('static', filename='models/')}}")
   //await faceapi.loadMtcnnModel("{{ url_for('static', filename='models/')}}")
@@ -262,13 +277,8 @@ async function run() {
 
   //await faceapi.loadFaceLandmarkTinyModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
 
-  const videoEl = document.getElementById('inputVideo')
 
-  navigator.getUserMedia(
-    { video: {} },
-    stream => videoEl.srcObject = stream,
-    err => console.error(err)
-  )
+  
 
   //const alignedFaceTensors = await extractFaceTensors(input, alignedFaceBoxes)
 
@@ -330,8 +340,8 @@ function drawDetections(dimensions, canvas, results) {
     var crop = {
       top : dim_y,
       left : dim_x,
-      width : dim_width,
-      height : dim_height,
+      width : dim_width ,
+      height : dim_height ,
     }
     
     var canvas_cropped = document.createElement("canvas");
@@ -391,7 +401,7 @@ async function onPlay(videoEl) {
   //const detectionsArray = fullDesc.map(res => res.faceDetection)
   //faceapi.drawDetection('overlay',detectionsArray, { withScore: false })
   //faceapi.drawLandmarks('overlay', mtcnnResults.map(res => res.faceLandmarks), { lineWidth: 4, color: 'red' })
-  setTimeout(() => onPlay(videoEl),2000)
+  setTimeout(() => onPlay(videoEl),200)
 }
   
 
@@ -420,9 +430,9 @@ async function onPlay(videoEl) {
 
 document.getElementById("snap").addEventListener("click", function() {
   run()
+
   //window.setInterval(function(){
-  const videoEl = document.getElementById('inputVideo')
-  onPlay(videoEl)
+ 
     //("#res").show();
    //}, 5000);
 
