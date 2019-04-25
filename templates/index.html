@@ -240,7 +240,6 @@ a.animated-button.victoria-two:after {
 
 <script src="https://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
 <script src="{{ url_for('static', filename="js/face-api.js")}}"></script>
-
 <script>
   //width:640;
 //height:480
@@ -252,7 +251,7 @@ a.animated-button.victoria-two:after {
   //   </div>
 
 $(document).ready(function() {
-
+  faceapi.tf.ENV.set('WEBGL_PACK', false)
 
  })
 const videoEl = document.getElementById('inputVideo')
@@ -260,7 +259,7 @@ const canvas = document.getElementById('overlay')
 
 async function run() {
   faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
-
+  //tf.ENV.set('WEBGL_PACK', false)
   const stream = await navigator.mediaDevices.getUserMedia({ video: true })
 
     //navigator.mediaDevices.getUserMedia( {video: true})
