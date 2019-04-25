@@ -59,10 +59,33 @@ def predict_gender(image):
     #print(_)
     #print(preds)
     index = output.data.cpu().numpy()
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
     if index.argmax() == 0:
-        return "woman"
+        return ("woman", str(round(((a0 - a1)/ (2 * a0)) * 100))+' %')
     else:
-        return "man"
+        return ("man",str(round(((a1 - a0)/ (2 * a1)) * 100))+' %')
+
+
+def predict_look(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_gender(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+    a0 = index[0][0]
+    a1 = index[0][1]
+    if index.argmax() == 0:
+        return  ("You look like a famous woman with this accuracy", str(round(a0 * 30))+' %')
+    else:
+        return ("You look like a famous man with this accuracy", str(round(a1 * 30))+' %')
     
     
 def predict_glass(image):
@@ -77,12 +100,16 @@ def predict_glass(image):
     #print(_)
     #print(preds)
     index = output.data.cpu().numpy()
-    if index.argmax() == 0:
-        return "wearing glasses"
-    else:
-        return "no glasses"
     
-def predict_Chubby(image):
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    if index.argmax() == 0:
+        return ("wearing glasses", str(round(((a0 - a1)/ (2 * a0)) * 100))+' %')
+    else:
+        return ("no glasses",str(round(((a1 - a0)/ (2 * a1)) * 100))+' %')
+    
+def predict_chubby(image):
     image_tensor = test_transforms(image).float()
     #print(image_tensor.shape)
     image_tensor = image_tensor.unsqueeze_(0)
@@ -94,29 +121,36 @@ def predict_Chubby(image):
     #print(_)
     #print(preds)
     index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
     if index.argmax() == 0:
-        return "Chubby"
+        return ("Chubby", str(round(((a0 - a1)/ (2 * a0)) * 100))+' %')
     else:
-        return "no Chubby"
+        return ("no Chubby",str(round(((a1 - a0)/ (2 * a1)) * 100))+' %')
     
 #background process happening without any refreshing
 
 @app.route('/snap_a_signal', methods=["POST", "GET"])
 def process_signal():
     pixels = request.get_json()['data']
-    result=im2info(pixels)
-    if result:
-        print(result)
+    selected_model = request.get_json()['selected_model']
+    results, accuracy=im2info(pixels, selected_model)
+    print(results)
+    print(accuracy)
+    if results:
+        print(results)
 
-        return jsonify(gender=result[0],
-                       glass=result[1],
-                       chubby=result[2]
+        return jsonify(results=results,
+                       accuracy=accuracy
                        )
     #else:
     #    return jsonify(result = "0");
     print('kkkkkkkkkk2')    
 
-def im2info(pixels ):
+def im2info(pixels, selected_model ):
     #try:
     #image_data = dataUrlPattern.match(pixels).group(2)
     #image_data = image_data.encode()
@@ -177,13 +211,15 @@ def im2info(pixels ):
             
             #cropped_img.show()
             #PIL_image = Image.fromarray(newimg)
+    if selected_model == 'gender':
+        return predict_gender(background)
+    elif selected_model == 'look':
+        return predict_look(background)
+    elif selected_model == 'chubby':
+        return predict_chubby(background)
+    elif selected_model == 'glass': 
+        return predict_glass(background)
 
-    result = [predict_gender(background),
-              predict_glass(background),
-              predict_Chubby(background)]
-    
-    
-    return result
     #except:
         #result = [".",".","."]
        # return result

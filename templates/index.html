@@ -7,11 +7,11 @@
 
 body {
   font-family: 'Comfortaa', cursive;
-  background: #353535;
+  background: #c7b284;
   color: #FFF;
 }
 .jumbotron h1 {
-  color: #353535;
+  color: #1b1a0a;
 }
 
 
@@ -123,7 +123,7 @@ a.animated-button.victoria-two:after {
 	margin: 0px auto;
   width : "640";
   height:"480";
-	border: 10px #333 solid;
+	border: 10px rgb(234, 240, 179) solid;
 }
 #divcontainer {
   position: relative;
@@ -140,13 +140,13 @@ a.animated-button.victoria-two:after {
 /* Control the right side */
 .right {
   right: 0;
-  background-color:red;
+  background-color:rgb(131, 124, 94);
 }
 .extra {
   width: 100%;
   height: 50px;
   top: 100%;
-  background-color: firebrick;
+  background-color: rgb(141, 119, 49);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   line-height: 24px;
@@ -205,6 +205,59 @@ a.animated-button.victoria-two:after {
 #inputVideo {
   position: relative; 
 }
+
+.form-radio
+{
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     position: relative;
+     background-color: rgb(186, 186, 245) ;
+     color: rgb(129, 120, 41);
+     top: 10px;
+     height: 30px;
+     width: 30px;
+     left: 20px;
+     border-radius: 50px;
+     cursor: pointer;     
+     margin-right: 7px;
+     margin-left: 7px;
+
+     outline: none;
+}
+.form-radio:checked::before
+{
+     position: absolute;
+     font: 13px/1 'Open Sans', sans-serif;
+     left: 11px;
+     top: 7px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+.form-radio:hover
+{
+     background-color: rgb(55, 93, 143);
+}
+.form-radio:checked
+{
+     background-color: rgb(3, 44, 56);
+}
+label
+{
+     font: 18px/1.7 'Open Sans', sans-serif;
+     color: darkblue;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     cursor: pointer;
+     padding-left: 25px;
+     } 
+section {
+  display: flex;
+	flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30%;
+}
 </style>
 
 <div class="jumbotron text-center">
@@ -213,18 +266,24 @@ a.animated-button.victoria-two:after {
     <p style="color:#888;">Ahmed Elmahy</p>
 
     <button type="button" class="button" id="snap">Click here to Open Camera</button>
-    <button type="button" class="button" id="play">Click here to run the models after you open the camera</button>
-
+    <button type="button" class="button" id="play">Click here to run the model after you open the camera</button>
     </div>
+    <h2 id="results" style = "color: darkblue">Results will show here</h2>
+    <h2 id="accuracy" style = "color: darkblue">Accuracy will show here</h2>
+  </div>
+
+  <h4 style="color: darkblue">Kindly choose a model to show</h2>
+
+  <div id="models">
+    <input type="radio" name="model" value="gender" id="model" class="form-radio" checked><label for="radio-one"></label>Gender</label>
+    <input type="radio" name="model" value="look" id="model" class="form-radio" ><label for="radio-one">Find your famous look</label>
+    <input type="radio" name="model" value="glass" id="model" class="form-radio" ><label for="radio-one">Glasses</label>
+    <input type="radio" name="model" value="chubby" id="model" class="form-radio" ><label for="radio-one">Are you chubby</label>
+    
   </div>
 
 
 <div class="divcontainer">
-    <div class="right">
-        <h3 id="result_gender">Results</h3>
-        <h3 id="result_glass">Results</h3>
-        <h3 id="result_chubby">Results</h3>
-    </div>
     <video  onplay="onPlay(this)" id="inputVideo" autoplay muted ></video>
     <canvas id="overlay"/>
     
@@ -485,6 +544,8 @@ document.getElementById("play").addEventListener("click", function() {
 
 
 function send_canvas_ctx() {
+    var selected_model = document.querySelector('input[name="model"]:checked').value;
+    console.log(selected_model)
     input_data = canvas.toDataURL('image/png');
     //console.log(input_data)
 	  window.fetch('/snap_a_signal', {
@@ -493,12 +554,12 @@ function send_canvas_ctx() {
     		'Content-Type': 'application/json'
   		},
   		body: JSON.stringify({
-    		data: input_data
+    		data: input_data,
+        selected_model: selected_model
   		})
 	}).then((response) => response.json()).then((json) => {
-    document.getElementById('result_gender').innerHTML = json["gender"]
-    document.getElementById('result_glass').innerHTML = json["glass"]
-    document.getElementById('result_chubby').innerHTML = json["chubby"]
+    document.getElementById('results').innerHTML = json["results"]
+    document.getElementById('accuracy').innerHTML = json["accuracy"]
     
     console.log("else2")
     //const videoEl = document.getElementById('inputVideo')
