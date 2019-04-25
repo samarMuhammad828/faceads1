@@ -209,10 +209,12 @@ a.animated-button.victoria-two:after {
 
 <div class="jumbotron text-center">
   <div class="container">
-    <h1>Advertisment based on AI human features recognition </h1>
+    <h1>Advertisments based on human features recognized by AI </h1>
     <p style="color:#888;">Ahmed Elmahy</p>
 
     <button type="button" class="button" id="snap">Click here to Open Camera</button>
+    <button type="button" class="button" id="play">Click here to run the models after you open the camera</button>
+
     </div>
   </div>
 
@@ -264,7 +266,10 @@ async function run() {
     //navigator.mediaDevices.getUserMedia( {video: true})
     //.then((stream) => {
   videoEl.srcObject = stream;
-  onPlay(videoEl)
+
+  //onPlay(videoEl)
+  //console.log("result")
+
 
   //  }).catch((err) => {console.log(err);});
 
@@ -350,6 +355,7 @@ function drawDetections(dimensions, canvas, results) {
 
 
 async function onPlay(videoEl) {
+
   const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 128, scoreThreshold: 0.2 })
 
   var result = await faceapi.detectSingleFace(videoEl, options)
@@ -457,32 +463,10 @@ async function onPlay(videoEl) {
 
 document.getElementById("snap").addEventListener("click", function() {
   run()
-
-  //window.setInterval(function(){
- 
-    //("#res").show();
-   //}, 5000);
-
-//   if (navigator.mediaDevices.getUserMedia) {
-//   navigator.mediaDevices.getUserMedia({ video: true })
-//     .then(function (stream) {
-//       video.srcObject = stream;
-//       webcamStream = stream;
-
-//       window.setInterval(function(){
-//       canvas.getContext("2d").drawImage(video, 0, 0, 300, 300);
-//       send_canvas_ctx();
-//       $("#res").show();
-//       }, 5000);
-
-//     })
-//     .catch(function (err0r) {
-//       console.log("Something went wrong!");
-//     });
-// }
-
 });
-
+document.getElementById("play").addEventListener("click", function() {
+  onPlay(videoEl)
+});
 
 
 
