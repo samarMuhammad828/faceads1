@@ -139,9 +139,8 @@ a.animated-button.victoria-two:after {
 
 /* Control the right side */
 .right {
-  padding-top: 500px;
   right: 0;
-  background-color:#333 solid;
+  background-color:red;
 }
 .extra {
   width: 100%;
@@ -199,12 +198,12 @@ a.animated-button.victoria-two:after {
 
 }
 #overlay {
-  position: absolute; 
+  position: relative; 
   
 }
 
 #inputVideo {
-  position: absolute; 
+  position: relative; 
 }
 </style>
 
@@ -219,14 +218,16 @@ a.animated-button.victoria-two:after {
 
 
 <div class="divcontainer">
+    <div class="right">
+        <h3 id="result_gender">Results</h3>
+        <h3 id="result_glass">Results</h3>
+        <h3 id="result_chubby">Results</h3>
+    </div>
     <video  onplay="onPlay(this)" id="inputVideo" autoplay muted ></video>
     <canvas id="overlay"/>
+    
 </div>
-<div class="right">
-    <h3 id="result_gender">Results</h3>
-    <h3 id="result_glass">Results</h3>
-    <h3 id="result_chubby">Results</h3>
-</div>
+
 </div>
 
 
