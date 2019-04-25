@@ -127,9 +127,9 @@ a.animated-button.victoria-two:after {
 }
 #divcontainer {
   position: relative;
-	margin: 10px auto;
-  width : "640";
-  height:"480";
+	margin: 0px auto;
+  width : "300";
+  height:"300";
 	border: 10px #333 solid;
 }
 
@@ -252,12 +252,12 @@ $(document).ready(function() {
 
 
  })
-
+const videoEl = document.getElementById('inputVideo')
+const canvas = document.getElementById('overlay')
 
 async function run() {
   faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
 
-  const videoEl = document.getElementById('inputVideo')
   const stream = await navigator.mediaDevices.getUserMedia({ video: true })
 
     //navigator.mediaDevices.getUserMedia( {video: true})
@@ -316,8 +316,8 @@ function resizeCanvasAndResults(dimensions, canvas, results) {
     const { width, height } = dimensions instanceof HTMLVideoElement
         ? faceapi.getMediaDimensions(dimensions)
         : dimensions
-    canvas.width = width
-    canvas.height = height
+    //canvas.width = width
+    //canvas.height = height
 
     return results.map(res => res)
     //result = results[0]
@@ -328,27 +328,11 @@ function resizeCanvasAndResults(dimensions, canvas, results) {
 
 
 function drawDetections(dimensions, canvas, results) {
-    const resizedResults = resizeCanvasAndResults(dimensions, canvas, results)
+    //const resizedResults = resizeCanvasAndResults(dimensions, canvas, results)
     //faceapi.drawDetection(canvas, resizedResults.map(det => det.detection))
-    faceapi.drawDetection(canvas, resizedResults)
-
-    cropped_box = results.map(resizedResults => resizedResults.box)
-    dim_x = Math.round(cropped_box.map(box => box.x))
-    dim_y = Math.round(cropped_box.map(box => box.y))
-    dim_width = Math.round(cropped_box.map(box => box.width)) 
-    dim_height = Math.round(cropped_box.map(box => box.height)) 
-    var crop = {
-      top : dim_y,
-      left : dim_x,
-      width : dim_width ,
-      height : dim_height ,
-    }
+    //faceapi.drawDetection(canvas, resizedResults)
     
-    var canvas_cropped = document.createElement("canvas");
-    canvas_cropped.width = crop.width;
-    canvas_cropped.height = crop.height;
-    console.log([canvas_cropped,crop.top,crop.left])
-    return ([canvas_cropped,crop.left, crop.top])
+    //return canvas
 
 };
 
@@ -365,27 +349,69 @@ function drawDetections(dimensions, canvas, results) {
 
 
 async function onPlay(videoEl) {
-  const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 128, scoreThreshold: 0.3 })
+  const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 128, scoreThreshold: 0.2 })
 
   var result = await faceapi.detectSingleFace(videoEl, options)
 
-  //console.log(result)
+  console.log(result)
 
   if (result) {
 
     //const resizedResults = resizeCanvasAndResults(videoEl, document.getElementById('overlay'), [result])
 //     if (withBoxes) {
-    canvas_withleft_top = drawDetections(videoEl, document.getElementById('overlay'),  [result])
+    //drawDetections(videoEl, document.getElementById('overlay'),  [result])
     //var canvas2 = document.getElementById('canvas2');
+    const resizedResults = resizeCanvasAndResults(videoEl, canvas, [result])
+    console.log("resizedresults")
+    console.log(resizedResults)
+    cropped_box = resizedResults.map(resizedResults => resizedResults.box)
+    dim_x = Math.round(cropped_box.map(box => box.x))
+    dim_y = Math.round(cropped_box.map(box => box.y))
+    dim_width = Math.round(cropped_box.map(box => box.width)) 
+    dim_height = Math.round(cropped_box.map(box => box.height)) 
 
-    cropped_can = canvas_withleft_top[0]
-      
-    var ctx = cropped_can.getContext("2d"); // so we can draw
-    ctx.drawImage(videoEl, -canvas_withleft_top[1], -canvas_withleft_top[2]);
+    
+    var crop = {
+      top :  Math.max((dim_y - 50),0),
+      left : dim_x ,
+      width : dim_width + 10,
+      height : dim_height ,
+    }
 
+
+    //var c = document.getElementById("overlay");
+
+    var ctx = canvas.getContext("2d");
+    //canvas.width = crop.width;
+    //canvas.height = crop.height;
+
+    //ctx.rect(crop.left,crop.top, crop.width, crop.height);
+    //ctx.stroke();
+
+
+    //var canvas_cropped = document.createElement("canvas");
+    console.log([ctx,crop.top,crop.left])
+
+    //var ctx = cropped_can.getContext("2d"); // so we can draw
+    //ctx.drawImage(videoEl, ,);
+    
+    canvas.width = 128
+    canvas.height = 128
     //canvas.getContext("2d").drawImage(video, 0, 0, 300, 300);
-    send_canvas_ctx(cropped_can);
+    ctx.drawImage(videoEl, crop.left, crop.top, crop.width, crop.height, 0, 0, 128, 128);
+    send_canvas_ctx();
+    //send_canvas_ctx(canvas);
+    //cropped_can = canvas_withleft_top[0]
+    
+   
+    
 //       $("#res").show();
+}
+  else {
+    console.log("else")
+    setTimeout(() => onPlay(videoEl),200)
+  }
+
 
     
 //     }
@@ -401,8 +427,8 @@ async function onPlay(videoEl) {
   //const detectionsArray = fullDesc.map(res => res.faceDetection)
   //faceapi.drawDetection('overlay',detectionsArray, { withScore: false })
   //faceapi.drawLandmarks('overlay', mtcnnResults.map(res => res.faceLandmarks), { lineWidth: 4, color: 'red' })
-  setTimeout(() => onPlay(videoEl),200)
-}
+  //setTimeout(() => onPlay(videoEl),200)
+
   
 
 
@@ -474,8 +500,9 @@ document.getElementById("snap").addEventListener("click", function() {
 // }
 
 
-function send_canvas_ctx(cropped_can) {
-    input_data = cropped_can.toDataURL('image/png');
+function send_canvas_ctx() {
+    input_data = canvas.toDataURL('image/png');
+    //console.log(input_data)
 	  window.fetch('/snap_a_signal', {
   		method: 'POST',
   		headers: {
@@ -485,16 +512,16 @@ function send_canvas_ctx(cropped_can) {
     		data: input_data
   		})
 	}).then((response) => response.json()).then((json) => {
-
-   if (json["result"] == "0"){
-    0
-  } else {
     document.getElementById('result_gender').innerHTML = json["gender"]
     document.getElementById('result_glass').innerHTML = json["glass"]
     document.getElementById('result_chubby').innerHTML = json["chubby"]
-
+    
+    console.log("else2")
+    //const videoEl = document.getElementById('inputVideo')
+    onPlay(videoEl)
+  })
+  
   }
-  })}
           
 
 

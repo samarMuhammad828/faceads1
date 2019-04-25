@@ -1,85 +1,5 @@
-# facerec.py
-#import cv2
-import torch
-from torchvision import transforms
-from torch.autograd import Variable
-from PIL import Image
-import time
-
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-test_transforms = transforms.Compose([
-        transforms.Resize((128,128)),
-        #transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize([0.485, 0.456, 0.406], 
-                             [0.229, 0.224, 0.225])
-    ])
-
-# Model class must be defined somewhere
-model_gender = torch.load('model_gender_ft.pkl', map_location='cpu')
-model_gender.eval()
 
 
-model_glass = torch.load('modelglass_ft.pkl', map_location='cpu')
-model_glass.eval()
-
-
-model_Chubby = torch.load('modelChubby_ft.pkl', map_location='cpu')
-model_Chubby.eval()
-
-
-def predict_gender(image):
-    image_tensor = test_transforms(image).float()
-    #print(image_tensor.shape)
-    image_tensor = image_tensor.unsqueeze_(0)
-    #print(image_tensor.shape)
-    input = Variable(image_tensor)
-    input = input.to(device)
-    output = model_gender(input)
-    _, preds = torch.max(output, 1)
-    #print(_)
-    #print(preds)
-    index = output.data.cpu().numpy()
-    if index.argmax() == 0:
-        return "woman"
-    else:
-        return "man"
-    
-    
-def predict_glass(image):
-    image_tensor = test_transforms(image).float()
-    #print(image_tensor.shape)
-    image_tensor = image_tensor.unsqueeze_(0)
-    #print(image_tensor.shape)
-    input = Variable(image_tensor)
-    input = input.to(device)
-    output = model_glass(input)
-    _, preds = torch.max(output, 1)
-    #print(_)
-    #print(preds)
-    index = output.data.cpu().numpy()
-    if index.argmax() == 0:
-        return "wearing glasses"
-    else:
-        return "no glasses"
-    
-def predict_Chubby(image):
-    image_tensor = test_transforms(image).float()
-    #print(image_tensor.shape)
-    image_tensor = image_tensor.unsqueeze_(0)
-    #print(image_tensor.shape)
-    input = Variable(image_tensor)
-    input = input.to(device)
-    output = model_Chubby(input)
-    _, preds = torch.max(output, 1)
-    #print(_)
-    #print(preds)
-    index = output.data.cpu().numpy()
-    if index.argmax() == 0:
-        return "Chubby"
-    else:
-        return "no Chubby"
-    
 #size = 4
 #haar_file = 'haarcascade_frontalface_default.xml'
 #datasets = 'datasets'
@@ -108,7 +28,7 @@ def predict_Chubby(image):
 #model.train(images, lables)
 
 
-t1 = time.time()
+#t1 = time.time()
 #face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # Part 2: Use fisherRecognizer on camera stream
 #face_cascade = cv2.CascadeClassifier(haar_file)
