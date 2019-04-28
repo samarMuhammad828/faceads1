@@ -5,11 +5,10 @@ import io
 # facerec.py
 #import cv2
 
-from face_recognize import eval_models, \
-predict_gender, predict_glass, predict_chubby, predict_look, predict_Receding_Hairline, \
-predict_Bags_Under_Eyes, predict_Bald, predict_Young, predict_Pale_Skin
 
-eval_models()
+from face_recognize import predictor
+global p
+p = predictor()
 
 app = Flask(__name__)
 
@@ -23,69 +22,37 @@ def process_signal():
     pixels = request.get_json()['data']
     selected_model = request.get_json()['selected_model']
     results, accuracy=im2info(pixels, selected_model)
-    print(results)
-    print(accuracy)
     if results:
-        print(results)
-
         return jsonify(results=results,
-                       accuracy=accuracy
-                       )
+                       accuracy=accuracy)
 
-    print('kkkkkkkkkk2')    
 
-def im2info(pixels, selected_model ):
-
+def im2info(pixels, modelname):
     image_data = base64.b64decode(pixels.split(",")[1])
-      
-    print('kkkkkkkkkk300000')        
-
     image = Image.open(io.BytesIO(image_data))
-
     background = image.convert('RGB')
+    if modelname == 'gender':
+        return p.predict_gender(background)
+    elif modelname == 'look':
+        return  p.predict_look(background)
+    elif modelname == 'chubby':
+        return p.predict_chubby(background)
+    elif modelname == 'glass':
+        return p.predict_glass(background)
+    elif modelname == 'Receding_Hairline':
+        return p.predict_Receding_Hairline(background)
+    elif modelname == 'Bags_Under_Eyes':
+        return p.predict_Bags_Under_Eyes(background)
+    elif modelname == 'Bald':
+        return p.predict_Bald(background)
+    elif modelname == 'Young':
+        return p.predict_Young(background)
+    elif modelname == 'Pale_Skin':
+        return p.predict_Pale_Skin(background)
 
-    print('kkkkkkkkkk3')    
-
-
-    #background.save('out.png')
-            
-            #cropped_img.show()
-            #PIL_image = Image.fromarray(newimg)
-    if selected_model == 'gender':
-        return predict_gender(background)
     
-    elif selected_model == 'look':
-        return predict_look(background)
-    
-    elif selected_model == 'chubby':
-        return predict_chubby(background)
-    elif selected_model == 'glass':
-        return predict_glass(background)
-    
-    
-    elif selected_model == 'Receding_Hairline': 
-        return predict_Receding_Hairline(background)
-    
-    elif selected_model == 'Bags_Under_Eyes': 
-        return predict_Bags_Under_Eyes(background)
-    
-    elif selected_model == 'Bald': 
-        return predict_Bald(background)
-    
-    elif selected_model == 'Young': 
-        return predict_Young(background)
-    
-    elif selected_model == 'Pale_Skin': 
-        return predict_Pale_Skin(background)
-
-
-
-
-    #except:
-        #result = [".",".","."]
-       # return result
-    
-    
+        
+        
     
     
 if __name__ == '__main__':
