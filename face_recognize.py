@@ -1,3 +1,254 @@
+import torch
+from torchvision import transforms
+from torch.autograd import Variable
+
+
+
+
+def eval_models():
+    
+    global device,test_transforms, model_gender, model_glass, model_Chubby,model_Receding_Hairline, \
+    model_Bags_Under_Eyes, model_Bald,model_Young, model_Pale_Skin
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    test_transforms = transforms.Compose([
+        #transforms.Resize((128,128)),
+        #transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize([0.485, 0.456, 0.406], 
+                             [0.229, 0.224, 0.225])
+    ])
+
+
+    model_gender = torch.load('model_gender_ft.pkl', map_location='cpu')
+    model_gender.eval()
+    
+    model_glass = torch.load('modelglass_ft.pkl', map_location='cpu')
+    model_glass.eval()
+    
+    model_Chubby = torch.load('modelChubby_ft.pkl', map_location='cpu')
+    model_Chubby.eval()
+    
+    model_Receding_Hairline = torch.load('modelReceding_Hairline_ft.pkl', map_location='cpu')
+    model_Receding_Hairline.eval()
+    
+    model_Bags_Under_Eyes = torch.load('modelBags_Under_Eyes_ft.pkl', map_location='cpu')
+    model_Bags_Under_Eyes.eval()
+    
+    model_Bald = torch.load('modelBald_ft.pkl', map_location='cpu')
+    model_Bald.eval()
+    
+    model_Young = torch.load('modelYoung_ft.pkl', map_location='cpu')
+    model_Young.eval()
+    
+    model_Pale_Skin = torch.load('modelPale_Skin_ft.pkl', map_location='cpu')
+    model_Pale_Skin.eval()
+    
+    print('kkkkkkkkkk')    
+
+        
+
+def acc(a0,a1):
+    x = round(((a0 - a1)/ (2 * a0)) * 100)
+    x = max(x,0)
+    x = min(x, 100)
+    return str(x)+' %'
+
+
+def predict_gender(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_gender(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    if index.argmax() == 0:
+        return ("woman", acc(a0,a1))
+    else:
+        return ("man",acc(a1,a0))
+
+
+def predict_look(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_gender(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+    a0 = index[0][0]
+    a1 = index[0][1]
+    if index.argmax() == 0:
+        return  ("You look like a famous woman with this accuracy", str(round(a0 * 30))+' %')
+    else:
+        return ("You look like a famous man with this accuracy", str(round(a1 * 30))+' %')
+    
+    
+def predict_glass(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_glass(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+    
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    if index.argmax() == 0:
+        return ("wearing glasses", acc(a0,a1))
+    else:
+        return ("no glasses",acc(a1,a0))
+    
+def predict_chubby(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Chubby(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("Chubby", acc(a0,a1))
+    else:
+        return ("no Chubby",acc(a1,a0))
+    
+    
+def predict_Receding_Hairline(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Receding_Hairline(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("no Receding_Hairline", acc(a0,a1))
+    else:
+        return ("Receding_Hairline",acc(a1,a0))    
+    
+
+def predict_Bags_Under_Eyes(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Bags_Under_Eyes(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("Bags_Under_Eyes", acc(a0,a1))
+    else:
+        return ("no Bags_Under_Eyes",acc(a1,a0))
+    
+def predict_Bald(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Bald(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("Bald", acc(a0,a1))
+    else:
+        return ("no Bald",acc(a1,a0))
+    
+def predict_Young(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Young(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("no Young", acc(a0,a1))
+    else:
+        return ("Young",acc(a1,a0))
+    
+def predict_Pale_Skin(image):
+    image_tensor = test_transforms(image).float()
+    #print(image_tensor.shape)
+    image_tensor = image_tensor.unsqueeze_(0)
+    #print(image_tensor.shape)
+    input = Variable(image_tensor)
+    input = input.to(device)
+    output = model_Pale_Skin(input)
+    _, preds = torch.max(output, 1)
+    #print(_)
+    #print(preds)
+    index = output.data.cpu().numpy()
+       
+    print(index)
+    a0 = index[0][0]
+    a1 = index[0][1]
+    
+    if index.argmax() == 0:
+        return ("no Pale_Skin", acc(a0,a1))
+    else:
+        return ("Pale_Skin",acc(a1,a0))
 
 
 #size = 4
