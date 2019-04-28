@@ -273,7 +273,8 @@ section {
     <h2 id="accuracy" style = "color: darkblue">Accuracy will show here</h2>
   </div>
 
-  <h4 style="color: darkblue">Kindly choose a model to show</h2>
+  <h4 style="color: darkblue">Kindly choose a model to show (please wait 30 sec. after changing model, some delay from
+    the server is expected but shouldn't be the case in the real application)</h2>
 
   <div id="models">
     <input type="radio" name="model" value="gender" id="model" class="form-radio" checked><label for="radio-one"></label>Gender</label>
@@ -289,7 +290,7 @@ section {
 
 
 <div class="divcontainer">
-    <video  onplay="onPlay(this)" id="inputVideo" autoplay muted ></video>
+    <video  onplay="onPlay(this)" id="inputVideo" width="640" height="480"  autoplay muted ></video>
     <canvas id="overlay"/>
     
 </div>
@@ -498,7 +499,7 @@ async function onPlay(videoEl) {
       top :  Math.max((dim_y - 55),0),
       left : dim_x ,
       width : dim_width + 20,
-      height : dim_height + 50,
+      height : dim_height + 50
     }
 
 
