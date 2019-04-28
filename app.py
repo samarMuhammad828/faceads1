@@ -47,7 +47,7 @@ def im2info(pixels, selected_model ):
     print('kkkkkkkkkk3')    
 
 
-    background.save('out.png')
+    #background.save('out.png')
             
             #cropped_img.show()
             #PIL_image = Image.fromarray(newimg)
