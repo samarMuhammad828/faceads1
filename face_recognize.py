@@ -70,9 +70,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return ("إمرأه : هذا المركز يبقي أشيك الملابس للنساء", self.acc(a0,a1))
+            return ("إمرأه : هذا المركز لديه أشيك الملابس للنساء", self.acc(a0,a1))
         else:
-            return ("رجل : هذا المركز يبقي أشيك الملابس للرجال",self.acc(a1,a0))
+            return ("رجل : هذا المركز لديه أشيك الملابس للرجال",self.acc(a1,a0))
      
 
     def predict_look(self,image):
@@ -90,7 +90,7 @@ class predictor:
         if index.argmax() == 0:
             return  (" : تبدين كإمرأة مشهورة بنسبة : مارأيك في هذا الفستان سيجعلك تبدين مشهورة", str(round(a0 * 30))+' %')
         else:
-            return ("يبدو مظهرك كرجل مشهور بنسبة", str(round(a1 * 30))+' %')
+            return ("يبدو مظهرك كرجل مشهور بنسبة: هذه البذله ستجلك تصل إلي 100%", str(round(a1 * 30))+' %')
             
         
     
@@ -171,7 +171,7 @@ class predictor:
         if index.argmax() == 0:
             return ("لديك أكياس دهنيه تحت العين هل فكرت بزيارة أحد أطباءنا للإطمئنان علي صحتك", self.acc(a0,a1))
         else:
-            return ("ليس لديك أكياس دهنيه تحت العين",self.acc(a1,a0))
+            return ("ليس لديك أكياس دهنيه تحت العين تبدو رياضيا مارأيك في هذا الحذاء الرياضي",self.acc(a1,a0))
         
     def predict_Bald(self,image):
         if self.modelname != 'Bald':
@@ -191,7 +191,7 @@ class predictor:
         if index.argmax() == 0:
             return ("أصلع هل جربت هذا المنتج لنمو الشعر", self.acc(a0,a1))
         else:
-            return ("لست أصلع",self.acc(a1,a0))
+            return ("لست أصلع  أجمل قصات الشعر للرجال في هذا المركز",self.acc(a1,a0))
         
     def predict_Young(self,image):
         if self.modelname != 'Young':
