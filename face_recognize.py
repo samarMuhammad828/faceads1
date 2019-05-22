@@ -70,9 +70,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return ("woman", self.acc(a0,a1))
+            return ("إمرأه : هذا المركز يبقي أشيك الملابس للنساء", self.acc(a0,a1))
         else:
-            return ("man",self.acc(a1,a0))
+            return ("رجل : هذا المركز يبقي أشيك الملابس للرجال",self.acc(a1,a0))
      
 
     def predict_look(self,image):
@@ -88,9 +88,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return  ("You look like a famous woman with this accuracy", str(round(a0 * 30))+' %')
+            return  (" : تبدين كإمرأة مشهورة بنسبة : مارأيك في هذا الفستان سيجعلك تبدين مشهورة", str(round(a0 * 30))+' %')
         else:
-            return ("You look like a famous man with this accuracy", str(round(a1 * 30))+' %')
+            return ("يبدو مظهرك كرجل مشهور بنسبة", str(round(a1 * 30))+' %')
             
         
     
@@ -108,9 +108,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return ("wearing glasses", self.acc(a0,a1))
+            return ("ترتدي نظارة هل جربت هذا المركز لشراء أجمل النضارات", self.acc(a0,a1))
         else:
-            return ("no glasses",self.acc(a1,a0))
+            return ("لا ترتدي نظارة",self.acc(a1,a0))
         
     def predict_chubby(self,image):
         if self.modelname != 'chubby':
@@ -127,9 +127,9 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("Chubby", self.acc(a0,a1))
+            return ("سمين : هذا التطبيق علي الموبايل يساعدك علي ممارسة الرياضه", self.acc(a0,a1))
         else:
-            return ("no Chubby",self.acc(a1,a0))
+            return ("لست سمين : هذا الحذاء الرياضي رائع جدا",self.acc(a1,a0))
         
             
     def predict_Receding_Hairline(self,image):
@@ -148,9 +148,9 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("no Receding_Hairline", self.acc(a0,a1))
+            return ("ليس لديك صلع خفيف : أجمل قصات الشعر للرجال في هذا المركز", self.acc(a0,a1))
         else:
-            return ("Receding_Hairline",self.acc(a1,a0))    
+            return ("لديك صلع خفيف : هذا المنتج سيحمي شعرك من التساقط",self.acc(a1,a0))    
         
     
     def predict_Bags_Under_Eyes(self,image):
@@ -169,9 +169,9 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("Bags_Under_Eyes", self.acc(a0,a1))
+            return ("لديك أكياس دهنيه تحت العين هل فكرت بزيارة أحد أطباءنا للإطمئنان علي صحتك", self.acc(a0,a1))
         else:
-            return ("no Bags_Under_Eyes",self.acc(a1,a0))
+            return ("ليس لديك أكياس دهنيه تحت العين",self.acc(a1,a0))
         
     def predict_Bald(self,image):
         if self.modelname != 'Bald':
@@ -189,9 +189,9 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("Bald", self.acc(a0,a1))
+            return ("أصلع هل جربت هذا المنتج لنمو الشعر", self.acc(a0,a1))
         else:
-            return ("no Bald",self.acc(a1,a0))
+            return ("لست أصلع",self.acc(a1,a0))
         
     def predict_Young(self,image):
         if self.modelname != 'Young':
@@ -209,9 +209,9 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("no Young", self.acc(a0,a1))
+            return (" رجل كبير يمكنك شراء ملابس رايقة من هذا المركز مع عرض صورة لرجل كبير يرتدي ملابس راقيه", self.acc(a0,a1))
         else:
-            return ("Young",self.acc(a1,a0))
+            return ("شاب أجمل الملابس الرياضيه من هذا المتجر",self.acc(a1,a0))
         
     def predict_Pale_Skin(self,image):
         if self.modelname != 'Pale_Skin':
@@ -229,7 +229,7 @@ class predictor:
         a1 = index[0][1]
         
         if index.argmax() == 0:
-            return ("no Pale_Skin", self.acc(a0,a1))
+            return ("لون بشرتك طبيعي", self.acc(a0,a1))
         else:
-            return ("Pale_Skin",self.acc(a1,a0))
+            return ("لون بشرتك باهت قليلا، مارأيك في هذا المنتج المحتوي علي الحديد والفيتامينات",self.acc(a1,a0))
         

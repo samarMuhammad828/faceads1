@@ -1,360 +1,243 @@
 <!--<a href="/exec" class="button"> This link will invoke Parse method </a> -->
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+        <link rel="stylesheet" href="style.css">
+        <title>project</title>
+    </head>
 <body>
-<style>
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
-@import url(https://fonts.googleapis.com/css?family=Comfortaa);
 
-body {
-  font-family: 'Comfortaa', cursive;
-  background: #c7b284;
-  color: #FFF;
-}
-.jumbotron h1 {
-  color: #1b1a0a;
-}
-
-
-footer {
-  margin-bottom: 0 !important;
-  margin-top: 80px;
-}
-footer p {
-  margin: 0;
-  padding: 0;
-}
-span.icon {
-  margin: 0 5px;
-  color: #D64541;
-}
-h2 {
-  color: #BDC3C7;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.mrng-60-top {
-  margin-top: 60px;
-}
-/* Global Button Styles */
-a.animated-button:link, a.animated-button:visited {
-  position: relative;
-  display: block;
-  margin: 30px auto 0;
-  padding: 14px 15px;
-  color: #fff;
-  font-size:14px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  letter-spacing: .08em;
-  border-radius: 0;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-}
-a.animated-button:link:after, a.animated-button:visited:after {
-  content: "";
-  position: absolute;
-  height: 0%;
-  left: 50%;
-  top: 50%;
-  width: 150%;
-  z-index: -1;
-  -webkit-transition: all 0.75s ease 0s;
-  -moz-transition: all 0.75s ease 0s;
-  -o-transition: all 0.75s ease 0s;
-  transition: all 0.75s ease 0s;
-}
-a.animated-button:link:hover, a.animated-button:visited:hover {
-  color: #FFF;
-  text-shadow: none;
-}
-a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
-  height: 450%;
-}
-a.animated-button:link, a.animated-button:visited {
-  position: relative;
-  display: block;
-  margin: 30px auto 0;
-  padding: 14px 15px;
-  color: #fff;
-  font-size:14px;
-  border-radius: 0;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  letter-spacing: .08em;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
-}
-
-/* Victoria Buttons */
-
-a.animated-button.victoria-one {
-  border: 2px solid #D24D57;
-}
-a.animated-button.victoria-one:after {
-  background: #D24D57;
-  -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
-  -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
-  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
-  transform: translateX(-50%) translateY(-50%) rotate(-25deg);
-}
-a.animated-button.victoria-two {
-  border: 2px solid #D24D57;
-}
-a.animated-button.victoria-two:after {
-  background: #D24D57;
-  -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
-  -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
-  -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
-  transform: translateX(-50%) translateY(-50%) rotate(25deg);
-}
-#container {
-	margin: 0px auto;
-  width : "640";
-  height:"480";
-	border: 10px rgb(234, 240, 179) solid;
-}
-#divcontainer {
-  position: relative;
-	margin: 0px auto;
-  width : "300";
-  height:"300";
-	border: 10px #333 solid;
-}
-
-#videoElement {
-	background-color: #666;
-}
-
-/* Control the right side */
-.right {
-  right: 0;
-  background-color:rgb(131, 124, 94);
-}
-.extra {
-  width: 100%;
-  height: 50px;
-  top: 100%;
-  background-color: rgb(141, 119, 49);
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  line-height: 24px;
-  text-indent: 5px;
-  font-size: 20px;
-}
-/* If you want the content centered horizontally and vertically */
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-/* Style the image inside the centered container, if needed */
-.centered img {
-  width: 150px;
-  border-radius: 50%;
-}
-
-.button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-
-.video {
-  position: relative;
-  z-index: 1;
-}
-.canvas {
-  position: absolute; 
-  top: 100px; 
-  color: #FFF; 
-  text-align: center;
-  font-size: 20px;
-  background-color: rgba(221, 221, 221, 0.3);
-  width: 640px;
-  padding: 10px 0;
-  z-index: 2147483647;
-
-
-}
-#overlay {
-  position: relative; 
+<!-- Start of Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <a class="navbar-brand ml-4" href="#"><img src="../static/logo.png" width="150px" height="50px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   
-}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link mr-2" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mr-2" href="http://wakeb.tech/#about_us">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mr-2" href="http://wakeb.tech/#services">Services</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link mr-2" href="http://wakeb.tech/#partners">Partners</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mr-2" href="http://wakeb.tech/#contact_us">Contact Us</a>
+        </li>
+      </ul>
 
-#inputVideo {
-  position: relative; 
-}
-
-.form-radio
-{
-     -webkit-appearance: none;
-     -moz-appearance: none;
-     appearance: none;
-     position: relative;
-     background-color: rgb(186, 186, 245) ;
-     color: rgb(129, 120, 41);
-     top: 10px;
-     height: 30px;
-     width: 30px;
-     left: 20px;
-     border-radius: 50px;
-     cursor: pointer;     
-     margin-right: 7px;
-     margin-left: 7px;
-
-     outline: none;
-}
-.form-radio:checked::before
-{
-     position: absolute;
-     font: 13px/1 'Open Sans', sans-serif;
-     left: 11px;
-     top: 7px;
-     content: '\02143';
-     transform: rotate(40deg);
-}
-.form-radio:hover
-{
-     background-color: rgb(55, 93, 143);
-}
-.form-radio:checked
-{
-     background-color: rgb(3, 44, 56);
-}
-label
-{
-     font: 18px/1.7 'Open Sans', sans-serif;
-     color: darkblue;
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
-     cursor: pointer;
-     padding-left: 25px;
-     } 
-section {
-  display: flex;
-	flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 30%;
-}
-</style>
-
-<div class="jumbotron text-center">
-  <div class="container">
-    <h1>Advertisments based on human features recognized by AI </h1>
-    <h2>Project portfolio</h2>
-    <p style="color:#888;">Ahmed Elmahy</p>
-
-    <button type="button" class="button" id="snap">Click here to Open Camera</button>
-    <button type="button" class="button" id="play">Click here to run the model after you open the camera</button>
     </div>
-    <h2 id="results" style = "color: darkblue">Results will show here</h2>
-    <h2 id="accuracy" style = "color: darkblue">Accuracy will show here</h2>
+  </nav><br><br>
+<!-- End Of Navbar -->
+<div class="jumbotron text-center" id="about_us">
+    <div class="container">
+        <h2 style="font-size:65px">توجيه الإعلانات بإستخدام طرق الذكاء الإصطناعي </h2>
+        <h2 style="color:#BDC3C7">أحد مشاريع واكب</h2>
+        <p style="color:#888;">أحمد الماحي</p> 
+        <h3> عرض حي للمشروع مع مثال لأحد الإعلانات التي يمكن أن تظهر في كل حالة</h3>        
+          <button type="button" class="btn btn-success p-2" id="play">إضغط هنا بعد فتح الكاميرا لتشغيل النموذج</button>
+          <button type="button" class="btn btn-success p-2" id="snap">إضغط هنا لفتح الكاميرا</button>
+    </div><br>
+        <h2 id="results" style = "color: darkblue;text-transform: uppercase">النتيجة تظهر هنا</h2>
+        <h2 id="accuracy" style = "color: darkblue;text-transform: uppercase">نسبة الدقة تظهر هنا</h2>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
+        <h4 class="text-center mt-5" style="color: darkblue">قد يكون هناك بعض البطء في ظهور النتائج</h4>
+    </div>
+    <div class="col-lg-6 " style="color: black">
+      <div id="models">
+      <div class="row">
+        <div class="col-6">
+          <input type="radio" name="model" value="gender" id="model" class="form-radio text-dark" checked><label for="radio-one"></label>الجنس</label>
+        </div>
+        <div class="col-6">
+          <input type="radio" name="model" value="look" id="model" class="form-radio" ><label for="radio-one">هل تبدو كشخص مشهور</label>
+        </div>
+        <div class="col-6">
+          <input type="radio" name="model" value="glass" id="model" class="form-radio" ><label for="radio-one">النظارات</label>
+        </div>
+        <div class="col-6">
+          <input type="radio" name="model" value="Receding_Hairline" id="model" class="form-radio" ><label for="radio-one">الصلع الخفيف</label>
+        </div>
+        <div class="col-6">
+            <input type="radio" name="model" value="Bags_Under_Eyes" id="model" class="form-radio" ><label for="radio-one">الاكياس الدهنية تحت العين</label>
+        </div>
+        <div class="col-6">
+            <input type="radio" name="model" value="Bald" id="model" class="form-radio" ><label for="radio-one">الصلع</label>
+        </div>
+        <div class="col-6">
+            <input type="radio" name="model" value="Young" id="model" class="form-radio" ><label for="radio-one">هل أنت شاب؟</label>
+        </div>
+        <div class="col-6">
+            <input type="radio" name="model" value="Pale_Skin" id="model" class="form-radio" ><label for="radio-one">هل يبدو لونك باهتا</label>
+        </div>
+      </div>
+    </div>  
+
+    </div>
   </div>
+</div>
 
-  <h4 style="color: darkblue">Kindly choose a model to show (please wait 30 sec. after changing model, some delay from
-    the server is expected but shouldn't be the case in the real application)</h2>
-
-  <div id="models">
-    <input type="radio" name="model" value="gender" id="model" class="form-radio" checked><label for="radio-one"></label>Gender</label>
-    <input type="radio" name="model" value="look" id="model" class="form-radio" ><label for="radio-one">Find your famous look</label>
-    <input type="radio" name="model" value="glass" id="model" class="form-radio" ><label for="radio-one">Glasses</label>
-    <input type="radio" name="model" value="Receding_Hairline" id="model" class="form-radio" ><label for="radio-one">Receding_Hairline</label>
-    <input type="radio" name="model" value="Bags_Under_Eyes" id="model" class="form-radio" ><label for="radio-one">Bags_Under_Eyes</label>
-    <input type="radio" name="model" value="Bald" id="model" class="form-radio" ><label for="radio-one">Bald</label>
-    <input type="radio" name="model" value="Young" id="model" class="form-radio" ><label for="radio-one">Young</label>
-    <input type="radio" name="model" value="Pale_Skin" id="model" class="form-radio" ><label for="radio-one">Pale_Skin</label>
-    
-  </div>
-
-
-<div class="divcontainer">
+<div class="divcontainer mt-4">
     <video  onplay="onPlay(this)" id="inputVideo" width="640" height="480"  autoplay muted ></video>
     <canvas id="overlay"/>
+</div>
+<section class="mt-2 p-5 text-white" style="background-color: #523ee8">
+  <div class="container">
+    <div class="row">
+      <div class="col-9">
+          <h1><strong>وصف المشروع ومميزاته</strong></h1>
+          <h3>
+            يبدو ان الإعلانات الذكية تجذب الإنتباه أكثر ، في هذا المشروع نستخدم كاميرا تحلل صورة الشخص وعلي الفور تظهر له إعلانات مناسبة لسنه ونوعه وشكله مما يجعل الفرد يجد في لوحة الإعلانات إنعكاسا لما يريده بالفعل
+          </h3>
+          <h3>
+            بالفعل تستطيع الآله التعرف علي الكثير من صفات البشر وقد نجحت العديد من التطبيقات المبنيه علي الذكاء الإصطناعي ونقدم هذا المشروع كبذرة لشركة صغيرة تطور لوحات إعلانات ذكية تنتشر في المعارض والأسواق الكبيرة تستهدف الكثير من المتسوقين الماريين في الطريق
+          </h3>
+          <h3>
+            ولدينا خطه لإستهداف صناعات معينه مثلا صناعات النظارات والمنتجات الصحية لإنماء الشعر والمنتجات الخاص بكبار السن والمنتجات الخاصة بالمرأة وغيرها من الصناعات المتخصصه علي سبيل المثال سوف نعرض لكبار السن إعلانات مختلفة عن التي نعرضها للصغار
+          </h3>
+
+      </div>
+      <div class="col-3">
+          <img src="../static/panel.png" alt="panel example">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="jumbotron text-center">
+    <h1 style="color:darkblue"><strong>خطة حماية البيانات</strong></h1>
+    <h1 style="color:darkblue">
+      بالفعل توجد العديد من الكاميرات في كل مكان ولا يمثل ذلك مشكلة ، ولكننا يهمنا خصوصية المارة لذلك ستعمل لوحة الإعلانات بدون ارسال أي صور شخصيه عبر الإنترنت وذلك حيث سيعمل نموذج الذكاء الإصطناعي داخليا داخل البرنامج المثبت في لوحة الإعلانات
+    </h1>
+</div>
+
+
+<section class="bg-primary p-3">
+  <div class="container text-info">
+    <h1 class="text-center" style="color:darkblue"><strong>كيفية التربح من الخدمة ؟</strong></h1>
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">هل إعلانك مناسب وجذاب</h5>
+              <p class="card-text">
+                لدينا خطه لحساب عدد الأشخاص الذين قرأوا إعلانك ، إذا وجدنا أحد الإعلانات لا يقف المارة أمامها كثير سوف نخبرك علي الفور لتقوم بالتعديل المناسب وهذه المزايا لن تتوفر إلا من خلال لوحة الإعلانات الذكية لدينا تخيل أنك قد تدفع أموال كثير من أجل منشورات دعائية ولا يقرأها أحد سيكون من الصعب معرفة مدي جاذبية المنشور وهل يقرأه المار أم يرميه ولكن معنا ستعرف بالتأكيد كم دقيقه قضاها المار أمام الإعلان
     
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">خطة تقييم ذكية</small>
+            </div>
+          </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">خطة دفع أموال عادلة</h5>
+          <p class="card-text">إذا كنت صاحب شركة وتريد عرض منتجاتك لن نأخذ منك أي نقود إلا فقط عندما يراها الناس ، يعتمد نموذج الذكاء الإصطناعي لدينا علي رصد من ينظر إلي الإعلان وحصرهم سوف تدفع فقط مبلغ مقابل لكل شخص قرأ بالفعل إعلانك ، إذا لم يقرأ إعلانك أحد نضمن لك أننا لن نأخذ منك أي مال
+
+          </p>
+
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">الدفع بعدد المشاهدات</small>
+        </div>
+      </div>
+      
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"> لوحات ذكية للإعلانات </h5>
+            <p class="card-text">أصحاب الشركات يدفعون مبالغ كبيرة للإعلانات ولكننا نعرض إعلانات بشكل ديناميكي مما سيعطينا أولويه لدي الشركات لعرض منتجاتهم بدلا من عرض إعلاناتهم علي لوحات صماء ثابته</p>
+          </div>
+          <div class="card-footer">
+              <small class="text-muted">إعلانات ذكية</small>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<div class="jumbotron">
+    <h1 class="text-center" style="color:darkblue"><strong>خطة التطوير</strong></h1>
+    <h4 class="text-center mt-2" style="color:darkblue">
+        نعمل حاليا علي تحميل قواعد بيانات ضخمة لصور الأشخاص ونقوم بتحليلها لإكتشاف مزايا أخري يمكن للأله التعرف عليها كالتعرف علي الأشخاص الرياضيين و السيدات الحوامل إلي أخره ، منتجنا قابل للدمج في لوحة إعلانات في أقرب خطوة حيث يتم نقل البرنامج الذي نطورة إلي جهاز أردوينو يتم إلحاقة بلوحة إعلانات متصل بها كاميرا
+    </h4>
 </div>
+<div class="container-fluid bg-primary p-2">
+<div class="card mb-3" style="max-width:100% text-info">
+    <h1 class="text-center p-4" style="color:darkblue"><strong>يمكنك إختبار النماذج علي هذه الصفحة</strong></h1>
+    <div class="row no-gutters">
+      <div class="col-md-6">
+        <img src="../static/test.png" class="card-img" style="max-width: 100%" height="350px" alt="panel example">
+      </div>
+      <div class="col-md-6">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h5 class="card-text text-center mt-2" style="color:darkblue"> 
+          عن طريق الكاميرا عند فتح هذا التطبيق من الكمبيوتر أو من الهاتف    
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><br>
 
+
+
+
+
+
+<section id="contact_us">
+<div class="container">
+  <h2 class="text-left" style="color: black;font-weight: bold">Contact Us يجري تعديلها للسماح للقاريء بإرسال تعليقاته مباشرة إلي المطور</h2>
+  <div class="row p-4">
+    <div class="col-7">
+      <form>
+          <div class="form-inline">
+            <div class="input-group flex-nowrap mr-2">
+              <input type="text" class="form-control" required placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa fa-user"></i></span>
+              </div>
+            </div>
+            <div class="input-group flex-nowrap ml-auto">
+                <input type="email" required class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="addon-wrapping"><i class="fa fa-envelope"></i></span>
+                </div>
+            </div>
+          </div><br>
+          <div class="input-group flex-nowrap mr-2">
+              <input type="text" class="form-control" width="40%" placeholder="Subject" aria-label="subject" aria-describedby="addon-wrapping">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping"><i class="fa fa-tag"></i></span>
+              </div>
+          </div><br>
+          <textarea  class="form-control" placeholder="Message" rows="5"></textarea><br>
+          <button class="btn btn-success" type="submit">Send Message</button>
+      </form>
+    </div>
+    <div class="col-5">
+      <img src="../static/contact_us.jpg" style="width: 100%;height: 55%">
+    </div>
+  </div>
 </div>
-
-<h1 style="color:darkblue"><strong>Startup objective</strong></h1>
-<h1 style="color:darkblue">You don't need to spend  money on irrelavant ads anymore. It's time for smart ads; Online and on the street.
-  We build smart advertisement panels that personalize advertisements to the people walking in front of it. For example, the panel below
-  is statis, but if we attached a camera and a small ardiuno to it, the advertisments shown will change to be specific for each pedestrian.
-</h1>
-<img src="{{ url_for('static', filename='panel.png')}}" alt="panel example">
-<h1 style="color:darkblue"><strong>Expected costs</strong></h1>
-<h1 style="color:darkblue">
-  The same costs for an electronic advertisements panel plus price for the attached camera and cheap arduino to run the model. This should
-  not exceed 50$ above the panel cost. 
-</h1>
-<br>
-
-<h1 style="color:darkblue"><strong>Team</strong></h1>
-<h1 style="color:darkblue">
-    <ol>
-        <li>I am working on the backend models, will improve them as much as possible</li>
-        <li>An engineer for designing the panel, electricity, attaching the arduino and the screen 
-          (I am trying now to estimate the costs for building a minimal viable product)
-        </li>
-      </ol>
-</h1>
-<br>
-<h1 style="color:darkblue"><strong>Target customers</strong></h1>
-<h1 style="color:darkblue">
-  At the baseline, the panel will show ads which means any brand should be a target customer. But we have much more innovative plans to make
-  our panel unique in the market:
-  <ol>
-      <li>We offer to specific industries, personalized ads such as women specifc ads; glasses ads for people wearing glasses;
-         hair growth for bald people, products for the old, products for the young, products for men, products for people who look pale 
-         possibly due to anemia and we will have unlimited ways to personalize ads</li>
-      <li>Pay per view, a smart way to count the numbers of people looking at a specific ad and based on that number companies 
-        will pay and it will also give them feedback about the attractiveness of their ads
-      </li>
-      <li>
-        Very potential self learning plan: since the camera will detect people who look at specific ads that appear on the panel, We will build
-        a model from these data.This model will detect features in people attracted to specific ads and when new people with similar features 
-        walk by, these specifc ads will appear to them. #self learning 
-      </li>
-    </ol>
-</h1>
-
-<h1 style="color:darkblue"><strong>Privacy concern</strong></h1>
-<h1 style="color:darkblue">
-  This doesn't seem to be as limiting as I expected. There are public cameras everywhere and in almost every cafe, mall and restaurant
-  and there were no legal activites against these cameras since they don't publish these image and since the cameras are in public place.
-  Our panels will also be in public places, in malls, in the street and in conferences. In fact, we don't mind printing a large label above
-  the panel to tell pedestrians that there is a camera and that the panel is smart. Actually, it can be a way to attract people.
-</h1>
-<br>
-<h1 style="color:darkblue"><strong>How to test it ?</strong></h1>
-<h1 style="color:darkblue"> 
-  you can use your webcam or also you can also show your webcam a video running on youtube (the resolution will definitely affect 
-  the accuracy). We don't claim that we are 100% accurate but at least it works in many situations specially for things like wearing 
-  glasses. 
-  
-</h1>
-<img src="{{ url_for('static', filename='test.png')}}" alt="panel example">
+</section>
+<div class="footer bg-dark p-2 text-center">
+  <h5>Copyrights &copy; Wakeb</h5>
+</div>
 
 <script src="https://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
 <script src="{{ url_for('static', filename="js/face-api.js")}}"></script>
@@ -631,6 +514,8 @@ function send_canvas_ctx() {
 
 
 </script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
