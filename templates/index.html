@@ -1,502 +1,311 @@
-<!--<a href="/exec" class="button"> This link will invoke Parse method </a> -->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-        <link rel="stylesheet" href="style.css">
-        <title>project</title>
-    </head>
+<!doctype html>
+<!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Mobile Meta -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Site Meta -->
+    <title>WAKEB</title>
+    <meta name="keywords" content="AI">
+    <meta name="description" content="AI Wakeb">
+    <meta name="author" content="Wakeb">
+    
+    <!-- Site Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='images/siteicons/apple-icon-57x57.png')}}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='images/siteicons/apple-icon-60x60.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='images/siteicons/apple-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='images/siteicons/apple-icon-76x76.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='images/siteicons/apple-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='images/siteicons/apple-icon-120x120.png')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='images/siteicons/apple-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='images/siteicons/apple-icon-152x152.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/siteicons/apple-icon-180x180.png')}}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ url_for('static', filename='images/siteicons/android-icon-192x192.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/siteicons/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='images/siteicons/favicon-96x96.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/siteicons/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/siteicons/manifest.json')}}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='images/siteicons/ms-icon-144x144.png')}}">
+    <meta name="theme-color" content="#ffffff">
+
+	<!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i" rel="stylesheet"> 
+	
+    <!-- Custom & Default Styles -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+
+	<!--[if lt IE 9]>
+		<script src="{{ url_for('static', filename='js/vendor/html5shiv.min.js')}}"></script>
+		<script src="{{ url_for('static', filename='js/vendor/respond.min.js')}}"></script>
+	<![endif]-->
+
+</head>
 <body>
 
-<!-- Start of Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-    <a class="navbar-brand ml-4" href="#"><img src="../static/logo.png" width="150px" height="50px"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item active">
-          <a class="nav-link mr-2" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mr-2" href="http://wakeb.tech/#about_us">About Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mr-2" href="http://wakeb.tech/#services">Services</a>
-          </li>
-        <li class="nav-item">
-          <a class="nav-link mr-2" href="http://wakeb.tech/#partners">Partners</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link mr-2" href="http://wakeb.tech/#contact_us">Contact Us</a>
-        </li>
-      </ul>
 
-    </div>
-  </nav><br><br>
-<!-- End Of Navbar -->
-<div class="jumbotron text-center" id="about_us">
-    <div class="container">
-        <h2 style="font-size:65px">توجيه الإعلانات بإستخدام طرق الذكاء الإصطناعي </h2>
-        <h2 style="color:#BDC3C7">أحد مشاريع واكب</h2>
-        <h3> عرض حي للمشروع مع مثال لأحد الإعلانات التي يمكن أن تظهر في كل حالة</h3>        
-          <button type="button" class="btn btn-success p-2" id="play">إضغط هنا بعد فتح الكاميرا لتشغيل النموذج</button>
-          <button type="button" class="btn btn-success p-2" id="snap">إضغط هنا لفتح الكاميرا</button>
-    </div><br>
-        <h2 id="results" style = "color: darkblue;text-transform: uppercase">النتيجة تظهر هنا</h2>
-        <h2 id="accuracy" style = "color: darkblue;text-transform: uppercase">نسبة الدقة تظهر هنا</h2>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-6">
-        <h4 class="text-center mt-5" style="color: darkblue">قد يكون هناك بعض البطء في ظهور النتائج</h4>
-    </div>
-    <div class="col-lg-6 " style="color: black">
-      <div id="models">
-      <div class="row">
-        <div class="col-6">
-          <input type="radio" name="model" value="gender" id="model" class="form-radio text-dark" checked><label for="radio-one"></label>الجنس</label>
-        </div>
-        <div class="col-6">
-          <input type="radio" name="model" value="look" id="model" class="form-radio" ><label for="radio-one">هل تبدو كشخص مشهور</label>
-        </div>
-        <div class="col-6">
-          <input type="radio" name="model" value="glass" id="model" class="form-radio" ><label for="radio-one">النظارات</label>
-        </div>
-        <div class="col-6">
-          <input type="radio" name="model" value="Receding_Hairline" id="model" class="form-radio" ><label for="radio-one">الصلع الخفيف</label>
-        </div>
-        <div class="col-6">
-            <input type="radio" name="model" value="Bags_Under_Eyes" id="model" class="form-radio" ><label for="radio-one">الاكياس الدهنية تحت العين</label>
-        </div>
-        <div class="col-6">
-            <input type="radio" name="model" value="Bald" id="model" class="form-radio" ><label for="radio-one">الصلع</label>
-        </div>
-        <div class="col-6">
-            <input type="radio" name="model" value="Young" id="model" class="form-radio" ><label for="radio-one">هل أنت شاب؟</label>
-        </div>
-        <div class="col-6">
-            <input type="radio" name="model" value="Pale_Skin" id="model" class="form-radio" ><label for="radio-one">هل يبدو لونك باهتا</label>
-        </div>
-      </div>
-    </div>  
+    <!-- LOADER -->
+    <div id="preloader">
+      <img class="preloader" src="{{ url_for('static', filename='images/loader.gif')}}" alt="Loading . . . ">
+  </div><!-- end loader -->
+  <!-- END LOADER -->
 
-    </div>
-  </div>
-</div>
+  <div id="wrapper">
+      <header class="header">
+          <div class="topbar clearfix">
+              <div class="container">
+                  <div class="row-fluid">
+                      <div class="col-md-6 col-sm-6 text-left">
+                          <p>
+                              <strong><i class="fa fa-phone"></i></strong> <a href="tel:+966537861951">+96 653 786 19 51</a> &nbsp;&nbsp;
+                              <strong><i class="fa fa-envelope"></i></strong> <a href="mailto:info@wakeb.tech">info@wakeb.tech</a>
+                          </p>
+                      </div><!-- end left -->
+                      <div class="col-md-6 col-sm-6 hidden-xs text-right">
+                          <div class="social">
+                              <a class="facebook" href="#" data-tooltip="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
+                              <a class="twitter" href="#" data-tooltip="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                              <a class="google" href="#" data-tooltip="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                              <a class="linkedin" href="#" data-tooltip="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                              <a class="pinterest" href="#" data-tooltip="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                          </div><!-- end social -->
+                      </div><!-- end left -->
+                  </div><!-- end row -->
+              </div><!-- end container -->
+          </div><!-- end topbar -->
 
-<div class="divcontainer mt-4">
-    <video  onplay="onPlay(this)" id="inputVideo" width="640" height="480"  autoplay muted ></video>
-    <canvas id="overlay"/>
-</div>
-<section class="mt-2 p-5 text-white" style="background-color: #523ee8">
-  <div class="container">
-    <div class="row">
-      <div class="col-9">
-          <h1><strong>وصف المشروع ومميزاته</strong></h1>
-          <h3>
-            يبدو ان الإعلانات الذكية تجذب الإنتباه أكثر ، في هذا المشروع نستخدم كاميرا تحلل صورة الشخص وعلي الفور تظهر له إعلانات مناسبة لسنه ونوعه وشكله مما يجعل الفرد يجد في لوحة الإعلانات إنعكاسا لما يريده بالفعل
-          </h3>
-          <h3>
-            بالفعل تستطيع الآله التعرف علي الكثير من صفات البشر وقد نجحت العديد من التطبيقات المبنيه علي الذكاء الإصطناعي ونقدم هذا المشروع كبذرة لشركة صغيرة تطور لوحات إعلانات ذكية تنتشر في المعارض والأسواق الكبيرة تستهدف الكثير من المتسوقين الماريين في الطريق
-          </h3>
-          <h3>
-            ولدينا خطه لإستهداف صناعات معينه مثلا صناعات النظارات والمنتجات الصحية لإنماء الشعر والمنتجات الخاص بكبار السن والمنتجات الخاصة بالمرأة وغيرها من الصناعات المتخصصه علي سبيل المثال سوف نعرض لكبار السن إعلانات مختلفة عن التي نعرضها للصغار
-          </h3>
-
-      </div>
-      <div class="col-3">
-          <img src="../static/panel.png" alt="panel example">
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="jumbotron text-center">
-    <h1 style="color:darkblue"><strong>خطة حماية البيانات</strong></h1>
-    <h1 style="color:darkblue">
-      بالفعل توجد العديد من الكاميرات في كل مكان ولا يمثل ذلك مشكلة ، ولكننا يهمنا خصوصية المارة لذلك ستعمل لوحة الإعلانات بدون ارسال أي صور شخصيه عبر الإنترنت وذلك حيث سيعمل نموذج الذكاء الإصطناعي داخليا داخل البرنامج المثبت في لوحة الإعلانات
-    </h1>
-</div>
-
-
-<section class="bg-primary p-3">
-  <div class="container text-info">
-    <h1 class="text-center" style="color:darkblue"><strong>كيفية التربح من الخدمة ؟</strong></h1>
-    <div class="card-deck">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">هل إعلانك مناسب وجذاب</h5>
-              <p class="card-text">
-                لدينا خطه لحساب عدد الأشخاص الذين قرأوا إعلانك ، إذا وجدنا أحد الإعلانات لا يقف المارة أمامها كثير سوف نخبرك علي الفور لتقوم بالتعديل المناسب وهذه المزايا لن تتوفر إلا من خلال لوحة الإعلانات الذكية لدينا تخيل أنك قد تدفع أموال كثير من أجل منشورات دعائية ولا يقرأها أحد سيكون من الصعب معرفة مدي جاذبية المنشور وهل يقرأه المار أم يرميه ولكن معنا ستعرف بالتأكيد كم دقيقه قضاها المار أمام الإعلان
-    
-              </p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted">خطة تقييم ذكية</small>
-            </div>
-          </div>
-
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">خطة دفع أموال عادلة</h5>
-          <p class="card-text">إذا كنت صاحب شركة وتريد عرض منتجاتك لن نأخذ منك أي نقود إلا فقط عندما يراها الناس ، يعتمد نموذج الذكاء الإصطناعي لدينا علي رصد من ينظر إلي الإعلان وحصرهم سوف تدفع فقط مبلغ مقابل لكل شخص قرأ بالفعل إعلانك ، إذا لم يقرأ إعلانك أحد نضمن لك أننا لن نأخذ منك أي مال
-
-          </p>
-
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">الدفع بعدد المشاهدات</small>
-        </div>
-      </div>
-      
-      <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"> لوحات ذكية للإعلانات </h5>
-            <p class="card-text">أصحاب الشركات يدفعون مبالغ كبيرة للإعلانات ولكننا نعرض إعلانات بشكل ديناميكي مما سيعطينا أولويه لدي الشركات لعرض منتجاتهم بدلا من عرض إعلاناتهم علي لوحات صماء ثابته</p>
-          </div>
-          <div class="card-footer">
-              <small class="text-muted">إعلانات ذكية</small>
-          </div>
-        </div>
-    </div>
-  </div>
-</section>
-
-<div class="jumbotron">
-    <h1 class="text-center" style="color:darkblue"><strong>خطة التطوير</strong></h1>
-    <h4 class="text-center mt-2" style="color:darkblue">
-        نعمل حاليا علي تحميل قواعد بيانات ضخمة لصور الأشخاص ونقوم بتحليلها لإكتشاف مزايا أخري يمكن للأله التعرف عليها كالتعرف علي الأشخاص الرياضيين و السيدات الحوامل إلي أخره ، منتجنا قابل للدمج في لوحة إعلانات في أقرب خطوة حيث يتم نقل البرنامج الذي نطورة إلي جهاز أردوينو يتم إلحاقة بلوحة إعلانات متصل بها كاميرا
-    </h4>
-</div><br>
-
-
-
-
-
-
-<section id="contact_us">
-<div class="container">
-  <h2 class="text-left" style="color: black;font-weight: bold">Contact us </h2>
-  <div class="row p-4">
-    <div class="col-7">
-      <form>
-          <div class="form-inline">
-            <div class="input-group flex-nowrap mr-2">
-              <input type="text" class="form-control" required placeholder="Name" aria-label="Username" aria-describedby="addon-wrapping">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping"><i class="fa fa-user"></i></span>
+          <div class="container">
+              <nav class="navbar navbar-default yamm">
+                  <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </button>
+                      <div class="logo-normal">
+                          <a class="navbar-brand" href="index.html"><img src="{{ url_for('static', filename='images/logo.png')}}" alt="Logo"></a>
+                      </div>
+                  </div>
+              </nav><!-- end navbar -->
+          </div><!-- end container -->
+      </header>
+      <section id="home" class="video-section js-height-full">
+          <div class="overlay"></div>
+          <div class="home-text-wrapper relative container">
+              <div class="home-message">
+                 <div class="row">
+                     <div class="col-xs-4 col-sm-3">
+                         <h3 class="text-center">صورتك</h3>
+                         <div id="videocontainer" class="divcontainer">
+                             <video onplay="onPlay(this)" id="inputVideo" autoplay muted ></video>
+                             <canvas id="overlay"/>
+                         </div>
+                     </div>
+                     <div class="col-xs-8 col-sm-4 col-sm-push-5">
+                         <div class="choice">
+                             <h4 class="text-center"><button id="snap" class="btn btn-default wow slideInRight">اضغط هنا لفتح الكاميرا&nbsp;<i class="fa fa-camera"></i> </button></h4>
+                             <h4 class="text-center">إختار النموذج</h4>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="gender" checked/>الجنس
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="look" />هل تبدو كشخص مشهور
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="glass" />النظارات
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="Receding_Hairline" />الصلع الخفيف
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="Bags_Under_Eyes" />الاكياس الدهنية تحت العين
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="Bald" />الصلع
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="Young" />هل أنت شاب؟
+                                 </label>
+                             </div>
+                             <div class="radio">
+                                 <label>
+                                     <input type="radio" name="model" value="Pale_Skin" />هل يبدو لونك باهتا
+                                 </label>
+                             </div>
+                             <h4 class="text-center"><button id="play" class="btn btn-success wow slideInRight">اضغط هنابعد فتح الكاميرا لتشغيل النموذج</button></h4>
+                         </div>
+                     </div>
+                     <div class="col-xs-12 col-sm-5 col-sm-pull-4 text-center">
+                         <p>توجيه الإعلانات بإستخدام طرق الذكاء الإصطناعي</p>
+                         <small>أحد مشاريع واكب</small>
+                         <hr />
+                         <h3 id="results">النتيجة تظهر هنا</h3>
+                         <h4 id="accuracy">نسبة الدقة تظهر هنا</h4>
+                     </div>
+                 </div>
               </div>
-            </div>
-            <div class="input-group flex-nowrap ml-auto">
-                <input type="email" required class="form-control" placeholder="Email" aria-label="Username" aria-describedby="addon-wrapping">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="addon-wrapping"><i class="fa fa-envelope"></i></span>
-                </div>
-            </div>
-          </div><br>
-          <div class="input-group flex-nowrap mr-2">
-              <input type="text" class="form-control" width="40%" placeholder="Subject" aria-label="subject" aria-describedby="addon-wrapping">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="addon-wrapping"><i class="fa fa-tag"></i></span>
+          </div>
+      </section>
+
+      <div class="copyrights">
+          <div class="container">
+              <div class="clearfix">
+                  <div class="pull-left col-xs-6">
+                      <div class="cop-logo">
+                          <a href="#"><img src="{{ url_for('static', filename='images/logo.png')}}" alt=""></a>
+                      </div>
+                  </div>
+
+                  <div class="pull-right col-xs-6">
+                      <div class="footer-links">
+                          <ul class="list-inline">
+                              <li>All CopyRight &copy; Reserved To  <a href="#">Wakeb</a> 2019</li>
+                          </ul>
+                      </div>
+                  </div>
               </div>
-          </div><br>
-          <textarea  class="form-control" placeholder="Message" rows="5"></textarea><br>
-          <button class="btn btn-success" type="submit">Send Message</button>
-      </form>
-    </div>
-    <div class="col-5">
-      <img src="../static/contact_us.jpg" style="width: 100%;height: 55%">
-    </div>
-  </div>
-</div>
-</section>
-<div class="footer bg-dark p-2 text-center">
-  <h5>Copyrights &copy; Wakeb</h5>
-</div>
+          </div><!-- end container -->
+      </div><!-- end copy -->
+  </div><!-- end wrapper -->
 
-<script src="https://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
-<script src="{{ url_for('static', filename="js/face-api.js")}}"></script>
-<script>
-  //width:640;
-//height:480
-// onplay="onPlay(this)"
-  // <div id="viewer">
-  //       <div id="cam">
-  //           <video style="display:block;" id="video"  width="640" height="480" autoplay></video>
-  //       </div>
-  //   </div>
+  <script src="{{ url_for('static', filename='js/face-api.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
 
-$(document).ready(function() {
-  faceapi.tf.ENV.set('WEBGL_PACK', false)
+  <script>
+      $(document).ready(function() {
+          faceapi.tf.ENV.set('WEBGL_PACK', false)
 
- })
-const videoEl = document.getElementById('inputVideo')
-const canvas = document.getElementById('overlay')
+      })
+      const videoEl = document.getElementById('inputVideo')
+      const canvas = document.getElementById('overlay')
 
-async function run() {
-  faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
-  //tf.ENV.set('WEBGL_PACK', false)
-  const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+      async function run() {
+          faceapi.loadTinyFaceDetectorModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+          videoEl.srcObject = stream;
 
-    //navigator.mediaDevices.getUserMedia( {video: true})
-    //.then((stream) => {
-  videoEl.srcObject = stream;
-
-  //onPlay(videoEl)
-  //console.log("result")
+      }
+      function resizeCanvasAndResults(dimensions, canvas, results) {
+          const { width, height } = dimensions instanceof HTMLVideoElement
+              ? faceapi.getMediaDimensions(dimensions)
+              : dimensions
+          return results.map(res => res)
+      };
 
 
-  //  }).catch((err) => {console.log(err);});
+      function drawDetections(dimensions, canvas, results) {
 
+      };
+      async function onPlay(videoEl) {
 
-   
-  //await faceapi.loadTinyFaceDetectorModel("{{ url_for('static', filename='models/')}}")
-  //await faceapi.loadFaceRecognitionModel("{{ url_for('static', filename='models/')}}")
-  //await faceapi.loadMtcnnModel("{{ url_for('static', filename='models/')}}")
-  //await faceapi.loadFaceRecognitionModel("{{ url_for('static', filename='models/')}}")
-  //await faceapi.loadFaceLandmarkTinyModel("{{ url_for('static', filename='models/')}}");
+          const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.2 })
 
-  //await faceapi.loadFaceLandmarkTinyModel('https://www.rocksetta.com/tensorflowjs/saved-models/face-api-js/')
+          var result = await faceapi.detectSingleFace(videoEl, options)
 
-
-  
-
-  //const alignedFaceTensors = await extractFaceTensors(input, alignedFaceBoxes)
-
-  //const descriptors = await Promise.all(alignedFaceTensors.map(
-  //))
-
-
-
-}
-/* async function getFullFaceDescription(blob, inputSize = 512) {
-  // tiny_face_detector options
-  let scoreThreshold = 0.5;
-  const OPTION = new faceapi.TinyFaceDetectorOptions({
-    inputSize,
-    scoreThreshold
-  });
-  const useTinyModel = true;
-
-  // fetch image to api
-  let img = await faceapi.fetchImage(blob);
-
-  // detect all faces and generate full description from image
-  // including landmark and descriptor of each face
-  let fullDesc = await faceapi
-    .detectAllFaces(img, OPTION)
-    .withFaceLandmarks(useTinyModel)
-    .withFaceDescriptors();
-  return fullDesc;
-} */
-/* const mtcnnForwardParams = {
-  // limiting the search space to larger faces for webcam detection
-  minFaceSize: 200
-} */
-function resizeCanvasAndResults(dimensions, canvas, results) {
-    const { width, height } = dimensions instanceof HTMLVideoElement
-        ? faceapi.getMediaDimensions(dimensions)
-        : dimensions
-    //canvas.width = width
-    //canvas.height = height
-
-    return results.map(res => res)
-    //result = results[0]
-    
-    //return result.detection.forSize(width, height);
-     
-};
-
-
-function drawDetections(dimensions, canvas, results) {
-    //const resizedResults = resizeCanvasAndResults(dimensions, canvas, results)
-    //faceapi.drawDetection(canvas, resizedResults.map(det => det.detection))
-    //faceapi.drawDetection(canvas, resizedResults)
-    
-    //return canvas
-
-};
-
-
-// function drawLandmarks(dimensions, canvas, results, withBoxes = true) {
-//     const resizedResults = this.resizeCanvasAndResults(dimensions, canvas, results)
-//     if (withBoxes) {
-//         faceapi.drawDetection(canvas, resizedResults.map(det => det.detection))
-//     }
-//     const faceLandmarks = resizedResults.map(det => det.landmarks)
-//     const drawLandmarksOptions = { lineWidth: 2, drawLines: true, color: 'green' }
-//     faceapi.drawLandmarks(canvas, faceLandmarks, drawLandmarksOptions)
-// };
-
-
-async function onPlay(videoEl) {
-
-  const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 416, scoreThreshold: 0.2 })
-
-  var result = await faceapi.detectSingleFace(videoEl, options)
-
-  console.log(result)
-
-  if (result) {
-
-    //const resizedResults = resizeCanvasAndResults(videoEl, document.getElementById('overlay'), [result])
-//     if (withBoxes) {
-    //drawDetections(videoEl, document.getElementById('overlay'),  [result])
-    //var canvas2 = document.getElementById('canvas2');
-    const resizedResults = resizeCanvasAndResults(videoEl, canvas, [result])
-    console.log("resizedresults")
-    console.log(resizedResults)
-    cropped_box = resizedResults.map(resizedResults => resizedResults.box)
-    dim_x = Math.round(cropped_box.map(box => box.x))
-    dim_y = Math.round(cropped_box.map(box => box.y))
-    dim_width = Math.round(cropped_box.map(box => box.width)) 
-    dim_height = Math.round(cropped_box.map(box => box.height)) 
-
-    
-    var crop = {
-      top :  Math.max((dim_y - 55),0),
-      left : dim_x ,
-      width : dim_width + 20,
-      height : dim_height + 50
-    }
-
-
-    //var c = document.getElementById("overlay");
-
-    var ctx = canvas.getContext("2d");
-    //canvas.width = crop.width;
-    //canvas.height = crop.height;
-
-    //ctx.rect(crop.left,crop.top, crop.width, crop.height);
-    //ctx.stroke();
-
-
-    //var canvas_cropped = document.createElement("canvas");
-    console.log([ctx,crop.top,crop.left])
-
-    //var ctx = cropped_can.getContext("2d"); // so we can draw
-    //ctx.drawImage(videoEl, ,);
-    
-    canvas.width = 128
-    canvas.height = 128
-    //canvas.getContext("2d").drawImage(video, 0, 0, 300, 300);
-    ctx.drawImage(videoEl, crop.left, crop.top, crop.width, crop.height, 0, 0, 128, 128);
-    send_canvas_ctx();
-    //send_canvas_ctx(canvas);
-    //cropped_can = canvas_withleft_top[0]
-    
-   
-    
-//       $("#res").show();
-}
-  else {
-    console.log("else")
-    setTimeout(() => onPlay(videoEl),200)
-  }
-
-
-    
-//     }
-            //console.log(result)
-            //drawLandmarks(videoEl, document.getElementById('overlay'), [result], true)
-}
-
-  //let fullDesc = await faceapi
-  // .detectAllFaces(document.getElementById('inputVideo'))
-  //return fullDesc;
-  //const mtcnnResults = await faceapi.mtcnn(document.getElementById('inputVideo'), mtcnnForwardParams)
-
-  //const detectionsArray = fullDesc.map(res => res.faceDetection)
-  //faceapi.drawDetection('overlay',detectionsArray, { withScore: false })
-  //faceapi.drawLandmarks('overlay', mtcnnResults.map(res => res.faceLandmarks), { lineWidth: 4, color: 'red' })
-  //setTimeout(() => onPlay(videoEl),200)
-
-  
-
-
-//faceTensor => faceapi.computeFaceDescriptor(faceTensor)
-//const alignedFaceBoxes = results.map(
- // ({ faceLandmarks }) => faceLandmarks.align()
-//)
-
-
-//const options = new faceapi.MtcnnOptions(mtcnnParams)
-//const input = document.getElementById('inputVideo')
-//const fullFaceDescriptions = await faceapi.detectAllFaces(input, options).withFaceLandmarks().withFaceDescriptors()
-
-
-//<div id="res" style="cursor:pointer;height:30px;"></div>
-//var video = document.querySelector("#videoElement");
-// var video = document.getElementById('inputVideo');
-
-// var ctx;
-// var canvas = document.createElement('canvas');
-// // Converts image to canvas; returns new canvas element
-// canvas.width="640"
-// canvas.height="480"
-
-
-document.getElementById("snap").addEventListener("click", function() {
-  run()
-});
-document.getElementById("play").addEventListener("click", function() {
-  onPlay(videoEl)
-});
-
-
-
-
-// function ping() {
-// 	window.fetch('/snap_a_signal')
-// 	  .then(function(response) {
-// 		      return response.text()
-// 		    }).then(function(body) {
-//           if (body["result"] == "0") {
-//             console.log(body["result"] == "0");
-//           } else {
-// 				    console.log(body);
-//           }
-// 		    });
-// }
-
-
-function send_canvas_ctx() {
-    var selected_model = document.querySelector('input[name="model"]:checked').value;
-    console.log(selected_model)
-    input_data = canvas.toDataURL('image/png');
-    //console.log(input_data)
-	  window.fetch('/snap_a_signal', {
-  		method: 'POST',
-  		headers: {
-    		'Content-Type': 'application/json'
-  		},
-  		body: JSON.stringify({
-    		data: input_data,
-        selected_model: selected_model
-  		})
-	}).then((response) => response.json()).then((json) => {
-    document.getElementById('results').innerHTML = json["results"]
-    document.getElementById('accuracy').innerHTML = json["accuracy"]
-    
-    console.log("else2")
-    //const videoEl = document.getElementById('inputVideo')
-    onPlay(videoEl)
-  })
-  
-  }
           
 
+          if (result) {
+              const resizedResults = resizeCanvasAndResults(videoEl, canvas, [result])
+              //console.log("resizedresults")
+              //console.log(resizedResults)
+              cropped_box = resizedResults.map(resizedResults => resizedResults.box)
+              dim_x = Math.round(cropped_box.map(box => box.x))
+              dim_y = Math.round(cropped_box.map(box => box.y))
+              dim_width = Math.round(cropped_box.map(box => box.width))
+              dim_height = Math.round(cropped_box.map(box => box.height))
+              var crop = {
+                  top :  Math.max((dim_y - 55),0),
+                  left : dim_x ,
+                  width : dim_width + 20,
+                  height : dim_height + 50
+              }
+              var ctx = canvas.getContext("2d");
+              //console.log([ctx,crop.top,crop.left])
 
 
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+              //const divface = document.createElement("div");
+
+              //const c = document.getElementById('videocontainer')
+              //c.append(divface)  
+              
+              //divface.setAttribute("style",`width:${dim_width}px;height:${dim_height}px; position:absolute;
+              // top: ${dim_y}px; left: ${dim_x}px; border:1px solid #f00; z-index: 10000000;display:block`)
+              canvas.width = 128
+              canvas.height = 128
+              ctx.drawImage(videoEl, crop.left, crop.top, crop.width, crop.height, 0, 0, 128, 128);
+              send_canvas_ctx();
+              // todo
+              // stop the loop
+
+          }
+          else {
+              console.log("else")
+              setTimeout(() => onPlay(videoEl),200)
+          }
+      }
+
+      document.getElementById("snap").addEventListener("click", function() {
+          run()
+      });
+      document.getElementById("play").addEventListener("click", function() {
+          onPlay(videoEl)
+      });
+
+      function send_canvas_ctx() {
+          var selected_model = document.querySelector('input[name="model"]:checked').value;
+          console.log("sending img to server..")
+          console.log(selected_model)
+          input_data = canvas.toDataURL('image/png');
+          window.fetch('/snap_a_signal', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  data: input_data,
+                  selected_model: selected_model
+              })
+          }).then((response) => response.json()).then((json) => {
+              document.getElementById('results').innerHTML = json["results"]
+              document.getElementById('accuracy').innerHTML = json["accuracy"]
+
+              //console.log("else2")
+              //const videoEl = document.getElementById('inputVideo')
+              //onPlay(videoEl)
+          });
+        }
+
+  </script>
+  <!-- jQuery Files -->
+  <script src="{{ url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/animate.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/custom.js')}}"></script>
+
 </body>
 </html>
