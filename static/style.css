@@ -310,10 +310,17 @@ SECTIONS
     position: relative;
     z-index: 11;
 }
+.home-message .choice label {
+    font-size: 18px;
+    padding-bottom: 7px;
+}
 .home-message {
     display: table-cell;
     height: 100%;
     vertical-align: middle;
+}
+.home-message .result{
+    padding-top: 0px;
 }
 .home-message p {
     font-size: 25px;
@@ -327,14 +334,12 @@ SECTIONS
     font-family: 'Droid Serif', sans-serif;
     font-style: italic;
     font-weight: bold;
-    display: block;
     color: #01bacf !important;
     padding: 10px 0;
     margin: 0;
 }
 .home-message .divcontainer {
-    height: 340px !important;
-    width: 100%;
+    height: 230px !important;
 }
 
 .home-message .divcontainer .canvas {
@@ -361,15 +366,15 @@ SECTIONS
     max-height: 100%;
     display: inline-block;
     right:0;
-
+    border: 4px solid #94478B;
+    box-shadow: 5px 5px 10px #94478B;
 }
 .home-message .choice{
-    border: 2px solid #94478B;
-    box-shadow: 5px 5px 8px #94478B;
+    border: 4px solid #94478B;
+    box-shadow: 5px 5px 10px #94478B;
     padding: 0px 20px;
     overflow: hidden;
     width: 100%;
-    height: 100%;
 }
 
 /******************************************
@@ -425,6 +430,13 @@ BUTTONS
 .btn-transparent {
     color: #ffffff;
     border: 1px solid #94478B;
+}
+
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default, .btn-default:visited, .btn-default.focus, .btn-default:focus {
+    background-image: none;
+    background-color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 
@@ -562,7 +574,7 @@ RESPONSIVE
         width: 100%;
     }
     .home-message p {
-        font-size: 15px;
+        font-size: 20px;
         color: #ffffff;
         padding: 0;
         margin: 0;
@@ -574,13 +586,14 @@ RESPONSIVE
         font-family: 'Droid Serif', sans-serif;
         font-style: italic;
         font-weight: bold;
-        display: block;
         color: #01bacf !important;
         padding: 10px 0;
         margin: 0;
     }
     .home-message .divcontainer {
         height: 220px !important;
+        padding: 4px;
+        
     }
     .home-message .divcontainer #inputVideo {
         position: relative;
@@ -589,14 +602,17 @@ RESPONSIVE
         max-height: 100%;
         display: inline-block;
         right:0;
+        border: 4px solid #94478B;
+        box-shadow: 5px 5px 10px #94478B;
     
+    }
+    .home-message .result{
+        padding-top: 0px;
     }
     .home-message .choice{
         border: none !important;
         box-shadow: none !important;
         padding: 0px 10px;
-        width: 101%;
-        height: 350px !important;
     }
     .home-message .choice h4 {
         margin-bottom: 10px !important;
@@ -606,6 +622,14 @@ RESPONSIVE
         display: block;
         margin-top: 0 !important;
         margin-bottom: 0 !important;
+    }
+    .home-message .choice label {
+        font-size: 12px;
+        font-weight: bold;
+        padding-bottom: 7px;
+    }
+    .home-message .radioinput {
+        margin-top: 10px !important;
     }
     .home-message .choice .radio {
         position: relative;
@@ -658,11 +682,14 @@ RESPONSIVE
         height: 100%;
         vertical-align: middle;
     }
+    .home-message .result{
+        padding-top: 0px;
+    }
     .home-message .choice .btn {
         width: 100%;
     }
     .home-message p {
-        font-size: 15px;
+        font-size: 20px;
         color: #ffffff;
         padding: 0;
         margin: 0;
@@ -675,7 +702,6 @@ RESPONSIVE
         font-family: 'Droid Serif', sans-serif; 
         font-style: italic;
         font-weight: bold;
-        display: block;
         color: #01bacf !important;
         padding: 10px 0;
         margin: 0;
@@ -689,8 +715,9 @@ RESPONSIVE
         max-width: 100%;
         max-height: 100%;
         display: inline-block;
-        right:0;
-    
+        right: 0;
+        border: 4px solid #94478B;
+        box-shadow: 5px 5px 10px #94478B;
     }
     .home-message .choice{
         border: none !important;
@@ -710,7 +737,9 @@ RESPONSIVE
         font-size: 10px;
     }
     .home-message .choice label {
-        font-size: 15px;
+        font-size: 10px;
+        padding-top: 0px;
+        padding-bottom: 5px;
     }
     .home-message .choice .radio {
         position: relative;
