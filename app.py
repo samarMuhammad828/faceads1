@@ -10,7 +10,7 @@ from face_recognize import predictor
 global p
 p = predictor()
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 @app.route('/')
 def index(name=None):

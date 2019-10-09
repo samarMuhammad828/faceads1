@@ -70,9 +70,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return ("إمرأه : هذا المركز لديه أشيك الملابس للنساء", self.acc(a0,a1))
+            return ("woman", self.acc(a0,a1))
         else:
-            return ("رجل : هذا المركز لديه أشيك الملابس للرجال",self.acc(a1,a0))
+            return ("man",self.acc(a1,a0))
      
 
     def predict_look(self,image):
@@ -108,9 +108,9 @@ class predictor:
         a0 = index[0][0]
         a1 = index[0][1]
         if index.argmax() == 0:
-            return ("ترتدي نظارة هل جربت هذا المركز لشراء أجمل النضارات", self.acc(a0,a1))
+            return ("glasses", self.acc(a0,a1))
         else:
-            return ("لا ترتدي نظارة",self.acc(a1,a0))
+            return ("noglasses",self.acc(a1,a0))
         
     def predict_chubby(self,image):
         if self.modelname != 'chubby':
