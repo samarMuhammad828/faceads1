@@ -68,9 +68,12 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+          <h1>
+            <label id="lbltipAddedComment">test</label>
+          </h1>
         </div>
         <div class="modal-body">
-          <video autoplay muted loop id = "myVideo" src="{{ url_for('static', filename='aa.webm') }}" style= type="video/mp4" controls>
+          <video autoplay muted loop id = "myVideo" src="{{ url_for('static', filename='kkk.webm') }}" type="video/mp4">
                     Your browser does not support the video tag.
           </video>
         </div>
@@ -256,9 +259,17 @@
 
           }
           else {
-              console.log("else")
-              setTimeout(() => onPlay(videoEl),200)
+              document.getElementById('lbltipAddedComment').innerHTML = "قف أمام الكاميرا حتي أراك";
+              current_video = ""
+              //console.log("else")
               
+              if (video1.getAttribute("src") !== "/static/kkk.webm"){
+                  //current_video = "man"
+                  video1.setAttribute("src", "{{ url_for('static', filename='kkk.webm')}}")
+               }
+               //setTimeout(() => onPlay(videoEl),1000)
+
+        
           }
       }
 
@@ -266,11 +277,12 @@
           run()
       });
       document.getElementById("play").addEventListener("click", function() {
-        window.setInterval(function(){onPlay(videoEl)}, 5000);
+        window.setInterval(function(){onPlay(videoEl)}, 2000);
         
 
           
       });
+      var current_video = ""
 
       function send_canvas_ctx() {
           var selected_model = document.querySelector('input[name="model"]:checked').value;
@@ -292,7 +304,6 @@
               message_to_show = json["results"] + '\n' + json["accuracy"]
               
               //Swal.fire(message_to_show)
-              var current_video = ""
               if (video1.getAttribute("src") === "/static/man.webm"){
                   current_video = "man"
               } else if (video1.getAttribute("src") === "/static/woman.webm") {
@@ -305,12 +316,17 @@
               console.log(json["results"])
               if (json["results"] != current_video){
                   if (json["results"] === "man"){
+                    document.getElementById('lbltipAddedComment').innerHTML = "رجل";
                     video1.setAttribute("src", "{{ url_for('static', filename='man.webm')}}")
                   } else if (json["results"] === "woman"){
+                    document.getElementById('lbltipAddedComment').innerHTML = "امرأة";
                     video1.setAttribute("src", "{{ url_for('static', filename='woman.webm')}}")
                   }  else if (json["results"] === "glasses"){
+                    document.getElementById('lbltipAddedComment').innerHTML = "ترتدي نظارة";
                     video1.setAttribute("src", "{{ url_for('static', filename='glasses.webm')}}")
                   }  else if (json["results"] === "noglasses"){
+                    document.getElementById('lbltipAddedComment').innerHTML = "لا ترتدي نظارة";
+
                     video1.setAttribute("src", "{{ url_for('static', filename='noglasses.webm')}}")
                   }
               }
